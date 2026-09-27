@@ -714,6 +714,8 @@ body.premium .premium-badge{display:inline-block}
   <div id="pane-ideas" class="pane hidden">
     <label>مجال عملك</label>
     <input id="id-field" placeholder="مثال: تسويق عقاري، طبخ، لياقة">
+    <label>جمهورك مين؟</label>
+    <input id="id-aud" placeholder="مثال: شباب بيشتري أول شقة، أمهات، طلاب">
   </div>
 
   <div class="out" id="out"></div>
@@ -930,15 +932,19 @@ ${text}`;
   }
   if (currentMode === "ideas") {
     const field = document.getElementById("id-field").value.trim();
+    const aud = document.getElementById("id-aud").value.trim();
     if (!field) return null;
-    return `أنت خبير محتوى. أعطني 10 أفكار محتوى عملية لمجال "${field}".
-قواعد:
-- كل فكرة في سطر لوحدها.
-- الفكرة + جملة توضيحية قصيرة.
-- محددة وقابلة للتنفيذ.
-- بدون مقدمة أو خاتمة.
+    const audPart = aud ? ` الجمهور المستهدف: ${aud}.` : "";
+    return `أنت خبير محتوى محترف. أعطني 5 أفكار محتوى محددة وقابلة للتنفيذ لمجال "${field}".${audPart}
 
-المجال: ${field}`;
+قواعد مهمة:
+- كل فكرة لازم تكون محددة، مش عامة. مثال سيء: "اعمل فيديو عن المنتج" — مثال جيد: "صوّر تجربة عميل حقيقي وهو بيستخدم المنتج، وقول السعر في الآخر".
+- لكل فكرة اكتب: العنوان (هوك) + وصف مختصر للتنفيذ في سطر واحد.
+- رتّبهم بالأرقام (1، 2، 3، 4، 5).
+- ممنوع أي مقدمة زي "إليك 5 أفكار" أو "بناءً على طلبك". ابدأ بالفكرة الأولى على طول.
+- ممنوع أي خاتمة أو ملاحظة في الآخر.
+
+المجال: ${field}${aud ? "\nالجمهور: " + aud : ""}`;
   }
   return null;
 }
