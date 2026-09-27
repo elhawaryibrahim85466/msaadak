@@ -945,6 +945,11 @@ document.getElementById("secretBtn").addEventListener("click", () => {
 
 
 // ===== Supabase Client =====
+window.addEventListener("DOMContentLoaded", async () => {
+if (!window.supabase) {
+  console.error("Supabase library not loaded");
+  return;
+}
 const SUPABASE_URL = "https://uqabememktnrhexsfmg.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_XMJl5RTKGR00SxLKMt6YJg_chONpV-q";
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -1056,6 +1061,7 @@ async function loadUserUsage() {
 
 applyPremium();
 renderCounter();
+});
 </script>
 </body>
 </html>
