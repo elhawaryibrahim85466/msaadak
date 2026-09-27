@@ -432,7 +432,20 @@ body.premium .premium-badge{display:inline-block}
   display:flex;align-items:center;justify-content:center;
   padding:24px 16px;overflow-y:auto;
 }
-.auth-gate.hidden{display:none}
+.auth-gate
+.admin-modal{position:fixed;inset:0;background:rgba(5,5,10,.85);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px}
+.admin-modal.hidden{display:none}
+.admin-modal-content{width:100%;max-width:360px;background:linear-gradient(180deg,rgba(30,30,42,.98),rgba(18,18,26,.98));border:1px solid rgba(232,200,96,.35);border-radius:22px;padding:28px;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.7)}
+.admin-close{position:absolute;top:14px;left:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#d0d0dc;font-size:1.1rem;cursor:pointer;font-family:inherit}
+.admin-title{text-align:center;font-size:1.3rem;font-weight:800;color:#f7dc85;margin-bottom:6px}
+.admin-sub{text-align:center;color:#a8a8b3;font-size:.85rem;margin-bottom:20px}
+.admin-input{width:100%;padding:13px 15px;margin-bottom:14px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.14);border-radius:12px;color:#f2f2f7;font-size:.95rem;font-family:inherit;text-align:center;letter-spacing:3px}
+.admin-input:focus{outline:none;border-color:rgba(232,200,96,.6);box-shadow:0 0 0 3px rgba(232,200,96,.15)}
+.admin-submit{width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(180deg,#f7dc85,#e8c860 50%,#c9a227);color:#1a1408;font-size:.95rem;font-weight:800;cursor:pointer;font-family:inherit}
+.admin-msg{text-align:center;font-size:.82rem;margin-top:12px;color:#ff8080;min-height:18px}
+.admin-msg.success{color:#7ce0a0}
+
+.hidden{display:none}
 .auth-gate-inner{
   width:100%;max-width:420px;
   text-align:center;
@@ -481,6 +494,19 @@ body.premium .premium-badge{display:inline-block}
 .gate-msg{font-size:.82rem;margin-top:12px;color:#e0a03e;min-height:18px}
 .gate-msg.error{color:#ff8080}
 .gate-msg.success{color:#7ce0a0}
+
+
+.admin-modal{position:fixed;inset:0;background:rgba(5,5,10,.85);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px}
+.admin-modal.hidden{display:none}
+.admin-modal-content{width:100%;max-width:360px;background:linear-gradient(180deg,rgba(30,30,42,.98),rgba(18,18,26,.98));border:1px solid rgba(232,200,96,.35);border-radius:22px;padding:28px;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.7)}
+.admin-close{position:absolute;top:14px;left:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#d0d0dc;font-size:1.1rem;cursor:pointer;font-family:inherit}
+.admin-title{text-align:center;font-size:1.3rem;font-weight:800;color:#f7dc85;margin-bottom:6px}
+.admin-sub{text-align:center;color:#a8a8b3;font-size:.85rem;margin-bottom:20px}
+.admin-input{width:100%;padding:13px 15px;margin-bottom:14px;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.14);border-radius:12px;color:#f2f2f7;font-size:.95rem;font-family:inherit;text-align:center;letter-spacing:3px}
+.admin-input:focus{outline:none;border-color:rgba(232,200,96,.6);box-shadow:0 0 0 3px rgba(232,200,96,.15)}
+.admin-submit{width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(180deg,#f7dc85,#e8c860 50%,#c9a227);color:#1a1408;font-size:.95rem;font-weight:800;cursor:pointer;font-family:inherit}
+.admin-msg{text-align:center;font-size:.82rem;margin-top:12px;color:#ff8080;min-height:18px}
+.admin-msg.success{color:#7ce0a0}
 
 .hidden{display:none}
 .copy-btn{width:100%;padding:12px;margin-bottom:12px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(232,200,96,.4);color:#f7dc85;font-size:.92rem;font-weight:700;cursor:pointer;letter-spacing:.3px;transition:all .2s ease}
@@ -766,7 +792,7 @@ body.premium .premium-badge{display:inline-block}
   </div>
 </div>
 
-<button class="secret-btn" id="secretBtn" title="وضع المالك">★</button>
+
 
 <script>
 const FREE_LIMIT = 12;
@@ -1067,9 +1093,91 @@ async function loadUserUsage() {
   }
 })();
 
+
+// ===== دخول المالك (سري) =====
+const ADMIN_HASH = "742a70d026931ec7d5d0e407e2c6ae07184011d1d16f12c2e9c676bdea0950be";
+const adminModal = document.getElementById("adminModal");
+const adminPass = document.getElementById("adminPass");
+const adminSubmit = document.getElementById("adminSubmit");
+const adminClose = document.getElementById("adminClose");
+const adminMsg = document.getElementById("adminMsg");
+
+// 5 ضغطات سريعة على شعار "مساعدك"
+let tapCount = 0;
+let tapTimer = null;
+const logoEl = document.querySelector("h1");
+if (logoEl) {
+  logoEl.addEventListener("click", () => {
+    tapCount++;
+    clearTimeout(tapTimer);
+    tapTimer = setTimeout(() => { tapCount = 0; }, 800);
+    if (tapCount >= 5) {
+      tapCount = 0;
+      adminModal.classList.remove("hidden");
+      adminPass.value = "";
+      adminMsg.textContent = "";
+      adminPass.focus();
+    }
+  });
+}
+
+adminClose.addEventListener("click", () => {
+  adminModal.classList.add("hidden");
+  adminMsg.textContent = "";
+});
+
+async function sha256(str) {
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest("SHA-256", buf);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+adminSubmit.addEventListener("click", async () => {
+  const pass = adminPass.value;
+  if (!pass) {
+    adminMsg.textContent = "أدخل كلمة المرور";
+    return;
+  }
+  const hash = await sha256(pass);
+  if (hash === ADMIN_HASH) {
+    // نفعّل البريميوم
+    if (isPremium()) {
+      localStorage.removeItem(PREMIUM_KEY);
+      adminMsg.textContent = "تم إيقاف البريميوم";
+      adminMsg.className = "admin-msg";
+    } else {
+      localStorage.setItem(PREMIUM_KEY, "1");
+      adminMsg.textContent = "تم تفعيل البريميوم";
+      adminMsg.className = "admin-msg success";
+    }
+    setTimeout(() => { location.reload(); }, 800);
+  } else {
+    adminMsg.textContent = "كلمة المرور غير صحيحة";
+    adminMsg.className = "admin-msg";
+    adminPass.value = "";
+  }
+});
+
+// Enter في خانة الباسورد
+adminPass.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") adminSubmit.click();
+});
+
 applyPremium();
 renderCounter();
 });
 </script>
+
+<div class="admin-modal hidden" id="adminModal">
+  <div class="admin-modal-content">
+    <button class="admin-close" id="adminClose">×</button>
+    <h2 class="admin-title">دخول المالك</h2>
+    <p class="admin-sub">أدخل كلمة المرور</p>
+    <input type="password" id="adminPass" placeholder="كلمة المرور" class="admin-input">
+    <button class="admin-submit" id="adminSubmit">دخول</button>
+    <p class="admin-msg" id="adminMsg"></p>
+  </div>
+</div>
+
 </body>
 </html>
