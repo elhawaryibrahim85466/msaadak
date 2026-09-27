@@ -555,6 +555,30 @@ body.premium .premium-badge{display:inline-block}
   .tabs{border-radius:16px}
   .tab{padding:8px 13px;font-size:.8rem}
 }
+
+#logoBtn{
+  font-family:inherit;
+  font-size:2.8rem;
+  font-weight:900;
+  letter-spacing:1px;
+  background:linear-gradient(180deg,#fff8e0,#e8c860 55%,#b8912f);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  color:transparent;
+  filter:drop-shadow(0 6px 24px rgba(232,200,96,.55));
+  margin:0 auto 4px auto;
+  padding:0;
+  border:none;
+  outline:none;
+  cursor:pointer;
+  display:inline-block;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-touch-callout:none;
+  user-select:none;
+  -webkit-user-select:none;
+  text-align:center;
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -583,7 +607,7 @@ body.premium .premium-badge{display:inline-block}
 </div>
 
 <header>
-  <div id="logoBtn" class="logo-h1">مساعدك</div>
+  <div id="logoBtn">مساعدك</div>
   <p id="tagline">صياغة احترافية بنقرة واحدة</p>
   <div class="premium-badge">مشترك بريميوم · استخدامات غير محدودة</div>
   <div id="logoutArea" style="margin-top:10px;text-align:center;"></div>
