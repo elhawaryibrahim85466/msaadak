@@ -399,6 +399,31 @@ body.premium .premium-badge{display:inline-block}
   font-size:.75rem;
 }
 
+
+/* ===== Auth ===== */
+.auth-area{margin-top:10px;text-align:center;z-index:1}
+.auth-btn{padding:8px 20px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.06));border:1px solid rgba(232,200,96,.4);color:#f7dc85;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s}
+.auth-btn:hover{background:rgba(232,200,96,.2);border-color:rgba(232,200,96,.7)}
+.user-info{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:6px}
+.user-email{color:#c8c8d4;font-size:.82rem;font-weight:600}
+.logout-btn{padding:5px 12px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#d0d0dc;font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit}
+.logout-btn:hover{background:rgba(224,94,94,.2);border-color:rgba(224,94,94,.5);color:#ff8080}
+
+.auth-modal{position:fixed;inset:0;background:rgba(5,5,10,.8);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px}
+.auth-modal-content{width:100%;max-width:400px;background:linear-gradient(180deg,rgba(30,30,42,.98),rgba(18,18,26,.98));border:1px solid rgba(255,255,255,.16);border-radius:22px;padding:28px;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.auth-close{position:absolute;top:14px;left:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#d0d0dc;font-size:1.1rem;cursor:pointer;font-family:inherit}
+.auth-title{text-align:center;font-size:1.4rem;font-weight:800;color:#f7dc85;margin-bottom:6px}
+.auth-sub{text-align:center;color:#a8a8b3;font-size:.85rem;margin-bottom:20px}
+.auth-input{width:100%;padding:12px 14px;margin-bottom:12px;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.14);border-radius:12px;color:#f2f2f7;font-size:.92rem;font-family:inherit}
+.auth-input:focus{outline:none;border-color:rgba(232,200,96,.6)}
+.auth-submit{width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(180deg,#f7dc85,#e8c860 50%,#c9a227);color:#1a1408;font-size:.95rem;font-weight:800;cursor:pointer;font-family:inherit;margin-top:6px}
+.auth-submit:disabled{opacity:.6;cursor:not-allowed}
+.auth-switch{text-align:center;color:#a8a8b3;font-size:.83rem;margin-top:16px}
+.auth-switch a{color:#f7dc85;text-decoration:none;font-weight:700}
+.auth-msg{text-align:center;font-size:.82rem;margin-top:12px;color:#e0a03e;min-height:18px}
+.auth-msg.error{color:#ff8080}
+.auth-msg.success{color:#7ce0a0}
+
 .hidden{display:none}
 .copy-btn{width:100%;padding:12px;margin-bottom:12px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(232,200,96,.4);color:#f7dc85;font-size:.92rem;font-weight:700;cursor:pointer;letter-spacing:.3px;transition:all .2s ease}
 .copy-btn:hover{background:rgba(232,200,96,.15);border-color:rgba(232,200,96,.7);transform:translateY(-1px)}
@@ -446,12 +471,20 @@ body.premium .premium-badge{display:inline-block}
   .tab{padding:8px 13px;font-size:.8rem}
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 <header>
   <h1>مساعدك</h1>
   <p id="tagline">صياغة احترافية بنقرة واحدة</p>
   <div class="premium-badge">مشترك بريميوم · استخدامات غير محدودة</div>
+  <div class="auth-area" id="authArea">
+    <button class="auth-btn" id="authBtn">تسجيل الدخول</button>
+    <div class="user-info hidden" id="userInfo">
+      <span class="user-email" id="userEmail"></span>
+      <button class="logout-btn" id="logoutBtn">خروج</button>
+    </div>
+  </div>
 </header>
 
 <div class="tabs">
@@ -658,6 +691,19 @@ body.premium .premium-badge{display:inline-block}
   </div>
 </div>
 
+<div class="auth-modal hidden" id="authModal">
+  <div class="auth-modal-content">
+    <button class="auth-close" id="authClose">×</button>
+    <h2 class="auth-title" id="authTitle">تسجيل الدخول</h2>
+    <p class="auth-sub">استخدم بريدك الإلكتروني</p>
+    <input type="email" id="authEmail" placeholder="البريد الإلكتروني" class="auth-input">
+    <input type="password" id="authPass" placeholder="كلمة المرور" class="auth-input">
+    <button class="auth-submit" id="authSubmit">تسجيل الدخول</button>
+    <p class="auth-switch">ليس لديك حساب؟ <a href="#" id="authSwitch">سجّل الآن</a></p>
+    <p class="auth-msg" id="authMsg"></p>
+  </div>
+</div>
+
 <button class="secret-btn" id="secretBtn" title="وضع المالك">★</button>
 
 <script>
@@ -833,6 +879,112 @@ document.getElementById("secretBtn").addEventListener("click", () => {
   }
   location.reload();
 });
+
+
+// ===== Supabase Auth =====
+const SUPABASE_URL = "https://uqabememktnrhexsfmg.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_XMJl5RTKGR00SxLKMt6YJg_chONpV-q";
+const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+const authModal = document.getElementById("authModal");
+const authBtn = document.getElementById("authBtn");
+const authClose = document.getElementById("authClose");
+const authEmail = document.getElementById("authEmail");
+const authPass = document.getElementById("authPass");
+const authSubmit = document.getElementById("authSubmit");
+const authSwitch = document.getElementById("authSwitch");
+const authTitle = document.getElementById("authTitle");
+const authMsg = document.getElementById("authMsg");
+const userInfo = document.getElementById("userInfo");
+const userEmail = document.getElementById("userEmail");
+const logoutBtn = document.getElementById("logoutBtn");
+
+let isSignupMode = false;
+
+authBtn.addEventListener("click", () => authModal.classList.remove("hidden"));
+authClose.addEventListener("click", () => { authModal.classList.add("hidden"); authMsg.textContent = ""; });
+
+authSwitch.addEventListener("click", (e) => {
+  e.preventDefault();
+  isSignupMode = !isSignupMode;
+  authTitle.textContent = isSignupMode ? "إنشاء حساب" : "تسجيل الدخول";
+  authSubmit.textContent = isSignupMode ? "سجّل الآن" : "تسجيل الدخول";
+  authSwitch.parentElement.innerHTML = isSignupMode
+    ? 'لديك حساب؟ <a href="#" id="authSwitch">سجّل دخول</a>'
+    : 'ليس لديك حساب؟ <a href="#" id="authSwitch">سجّل الآن</a>';
+  authMsg.textContent = "";
+});
+
+authSubmit.addEventListener("click", async () => {
+  const email = authEmail.value.trim();
+  const pass = authPass.value;
+  if (!email || !pass) { authMsg.textContent = "الرجاء إدخال البريد وكلمة المرور"; authMsg.className = "auth-msg error"; return; }
+  if (pass.length < 6) { authMsg.textContent = "كلمة المرور 6 أحرف على الأقل"; authMsg.className = "auth-msg error"; return; }
+
+  authSubmit.disabled = true;
+  authSubmit.textContent = "جارٍ...";
+  authMsg.textContent = "";
+
+  try {
+    if (isSignupMode) {
+      const { data, error } = await supabase.auth.signUp({ email, password: pass });
+      if (error) throw error;
+      authMsg.textContent = "تم! افتح بريدك واضغط على رابط التأكيد.";
+      authMsg.className = "auth-msg success";
+    } else {
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password: pass });
+      if (error) throw error;
+      authModal.classList.add("hidden");
+      updateAuthUI(data.user);
+      loadUserUsage();
+    }
+  } catch (e) {
+    authMsg.textContent = e.message || "حدث خطأ";
+    authMsg.className = "auth-msg error";
+  }
+
+  authSubmit.disabled = false;
+  authSubmit.textContent = isSignupMode ? "سجّل الآن" : "تسجيل الدخول";
+});
+
+logoutBtn.addEventListener("click", async () => {
+  await supabase.auth.signOut();
+  location.reload();
+});
+
+function updateAuthUI(user) {
+  if (user) {
+    authBtn.classList.add("hidden");
+    userInfo.classList.remove("hidden");
+    userEmail.textContent = user.email;
+  } else {
+    authBtn.classList.remove("hidden");
+    userInfo.classList.add("hidden");
+  }
+}
+
+// نتحقق من الحالة عند الفتح
+(async () => {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session?.user) {
+    updateAuthUI(session.user);
+    loadUserUsage();
+  }
+})();
+
+async function loadUserUsage() {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return;
+  const { data, error } = await supabase
+    .from("usage")
+    .select("count")
+    .eq("user_id", user.id)
+    .maybeSingle();
+  if (data) {
+    localStorage.setItem(TOTAL_KEY, JSON.stringify({ count: data.count }));
+    renderCounter();
+  }
+}
 
 applyPremium();
 renderCounter();
