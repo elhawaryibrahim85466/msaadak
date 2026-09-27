@@ -432,7 +432,7 @@ body.premium .premium-badge{display:inline-block}
   display:flex;align-items:center;justify-content:center;
   padding:24px 16px;overflow-y:auto;
 }
-.auth-gate
+.auth-gate{
 .admin-modal{position:fixed;inset:0;background:rgba(5,5,10,.85);z-index:2000;display:flex;align-items:center;justify-content:center;padding:20px}
 .admin-modal.hidden{display:none}
 .admin-modal-content{width:100%;max-width:360px;background:linear-gradient(180deg,rgba(30,30,42,.98),rgba(18,18,26,.98));border:1px solid rgba(232,200,96,.35);border-radius:22px;padding:28px;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.7)}
@@ -969,16 +969,7 @@ function applyPremium() {
   }
 }
 
-document.getElementById("secretBtn").addEventListener("click", () => {
-  if (isPremium()) {
-    localStorage.removeItem(PREMIUM_KEY);
-    alert("تم إيقاف وضع البريميوم");
-  } else {
-    localStorage.setItem(PREMIUM_KEY, "1");
-    alert("تم تفعيل وضع البريميوم ✨");
-  }
-  location.reload();
-});
+
 
 
 
