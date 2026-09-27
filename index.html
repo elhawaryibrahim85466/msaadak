@@ -1009,7 +1009,15 @@ gateSubmit.addEventListener("click", async () => {
       openApp(data.user);
     }
   } catch (e) {
-    gateMsg.textContent = e.message || "حدث خطأ";
+    const m = (e.message || "").toLowerCase();
+    let msg = "حدث خطأ، حاول مرة أخرى.";
+    if (m.includes("invalid login")) msg = "البريد أو كلمة المرور غير صحيحة.";
+    else if (m.includes("email not confirmed")) msg = "افتح بريدك واضغط رابط التأكيد أولاً.";
+    else if (m.includes("user already registered")) msg = "هذا البريد مسجل بالفعل، سجّل دخول.";
+    else if (m.includes("failed to fetch") || m.includes("network")) msg = "تحقق من اتصالك بالإنترنت.";
+    else if (m.includes("rate limit")) msg = "محاولات كثيرة، انتظر دقيقة.";
+    else if (m.includes("password")) msg = "كلمة المرور 6 أحرف على الأقل.";
+    gateMsg.textContent = msg;
     gateMsg.className = "gate-msg error";
   }
 
