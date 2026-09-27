@@ -424,6 +424,64 @@ body.premium .premium-badge{display:inline-block}
 .auth-msg.error{color:#ff8080}
 .auth-msg.success{color:#7ce0a0}
 
+
+/* ===== غلاف المصادقة ===== */
+.auth-gate{
+  position:fixed;inset:0;z-index:1000;
+  background:linear-gradient(180deg,#0a0a10 0%,#050507 100%);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px 16px;overflow-y:auto;
+}
+.auth-gate.hidden{display:none}
+.auth-gate-inner{
+  width:100%;max-width:420px;
+  text-align:center;
+}
+.gate-logo{
+  font-size:3rem;font-weight:900;letter-spacing:3px;
+  background:linear-gradient(180deg,#fff8e0,#e8c860 55%,#b8912f);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 6px 24px rgba(232,200,96,.5));
+  margin-bottom:8px;
+}
+.gate-sub{color:#a8a8b3;font-size:.92rem;margin-bottom:24px;line-height:1.6}
+.gate-features{
+  display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  margin-bottom:28px;
+}
+.gate-feature{
+  padding:6px 14px;border-radius:10px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  color:#c8c8d4;font-size:.78rem;font-weight:600;
+}
+.gate-form{
+  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:20px;padding:24px;
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+.gate-input{
+  width:100%;padding:14px 16px;margin-bottom:12px;
+  background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.14);
+  border-radius:12px;color:#f2f2f7;font-size:.93rem;font-family:inherit;
+}
+.gate-input:focus{outline:none;border-color:rgba(232,200,96,.6);box-shadow:0 0 0 3px rgba(232,200,96,.15)}
+.gate-submit{
+  width:100%;padding:14px;border:none;border-radius:12px;
+  background:linear-gradient(180deg,#f7dc85,#e8c860 50%,#c9a227);
+  color:#1a1408;font-size:.95rem;font-weight:800;
+  cursor:pointer;font-family:inherit;
+  box-shadow:0 8px 20px rgba(232,200,96,.4);
+}
+.gate-submit:disabled{opacity:.6;cursor:not-allowed}
+.gate-switch{color:#a8a8b3;font-size:.83rem;margin-top:16px}
+.gate-switch a{color:#f7dc85;text-decoration:none;font-weight:700}
+.gate-msg{font-size:.82rem;margin-top:12px;color:#e0a03e;min-height:18px}
+.gate-msg.error{color:#ff8080}
+.gate-msg.success{color:#7ce0a0}
+
 .hidden{display:none}
 .copy-btn{width:100%;padding:12px;margin-bottom:12px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(232,200,96,.4);color:#f7dc85;font-size:.92rem;font-weight:700;cursor:pointer;letter-spacing:.3px;transition:all .2s ease}
 .copy-btn:hover{background:rgba(232,200,96,.15);border-color:rgba(232,200,96,.7);transform:translateY(-1px)}
@@ -474,6 +532,29 @@ body.premium .premium-badge{display:inline-block}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+
+<div class="auth-gate" id="authGate">
+  <div class="auth-gate-inner">
+    <h1 class="gate-logo">مساعدك</h1>
+    <p class="gate-sub">أداتك الذكية للترجمة والصياغة وأفكار المحتوى</p>
+
+    <div class="gate-features">
+      <div class="gate-feature">ترجمة 26 لغة</div>
+      <div class="gate-feature">صياغة احترافية</div>
+      <div class="gate-feature">أوصاف منتجات</div>
+      <div class="gate-feature">أفكار محتوى</div>
+    </div>
+
+    <div class="gate-form">
+      <input type="email" id="gateEmail" placeholder="البريد الإلكتروني" class="gate-input">
+      <input type="password" id="gatePass" placeholder="كلمة المرور" class="gate-input">
+      <button class="gate-submit" id="gateSubmit">تسجيل الدخول</button>
+      <p class="gate-switch">ليس لديك حساب؟ <a href="#" id="gateSwitch">أنشئ حساباً جديداً</a></p>
+      <p class="gate-msg" id="gateMsg"></p>
+    </div>
+  </div>
+</div>
+
 <header>
   <h1>مساعدك</h1>
   <p id="tagline">صياغة احترافية بنقرة واحدة</p>
@@ -985,6 +1066,84 @@ async function loadUserUsage() {
     renderCounter();
   }
 }
+
+
+// ===== غلاف المصادقة =====
+const authGate = document.getElementById("authGate");
+const gateEmail = document.getElementById("gateEmail");
+const gatePass = document.getElementById("gatePass");
+const gateSubmit = document.getElementById("gateSubmit");
+const gateSwitch = document.getElementById("gateSwitch");
+const gateMsg = document.getElementById("gateMsg");
+let gateIsSignup = false;
+
+function bindGateSwitch() {
+  const el = document.getElementById("gateSwitch");
+  if (!el) return;
+  el.addEventListener("click", (e) => {
+    e.preventDefault();
+    gateIsSignup = !gateIsSignup;
+    gateSubmit.textContent = gateIsSignup ? "إنشاء حساب" : "تسجيل الدخول";
+    el.parentElement.innerHTML = gateIsSignup
+      ? 'لديك حساب بالفعل؟ <a href="#" id="gateSwitch">سجّل دخول</a>'
+      : 'ليس لديك حساب؟ <a href="#" id="gateSwitch">أنشئ حساباً جديداً</a>';
+    gateMsg.textContent = "";
+    bindGateSwitch();
+  });
+}
+bindGateSwitch();
+
+gateSubmit.addEventListener("click", async () => {
+  const email = gateEmail.value.trim();
+  const pass = gatePass.value;
+  if (!email || !pass) {
+    gateMsg.textContent = "الرجاء إدخال البريد وكلمة المرور";
+    gateMsg.className = "gate-msg error";
+    return;
+  }
+  if (pass.length < 6) {
+    gateMsg.textContent = "كلمة المرور 6 أحرف على الأقل";
+    gateMsg.className = "gate-msg error";
+    return;
+  }
+
+  gateSubmit.disabled = true;
+  gateSubmit.textContent = "جارٍ...";
+  gateMsg.textContent = "";
+
+  try {
+    if (gateIsSignup) {
+      const { error } = await supabase.auth.signUp({ email, password: pass });
+      if (error) throw error;
+      gateMsg.textContent = "تم! افتح بريدك واضغط رابط التأكيد.";
+      gateMsg.className = "gate-msg success";
+    } else {
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password: pass });
+      if (error) throw error;
+      openApp(data.user);
+    }
+  } catch (e) {
+    gateMsg.textContent = e.message || "حدث خطأ";
+    gateMsg.className = "gate-msg error";
+  }
+
+  gateSubmit.disabled = false;
+  gateSubmit.textContent = gateIsSignup ? "إنشاء حساب" : "تسجيل الدخول";
+});
+
+function openApp(user) {
+  authGate.classList.add("hidden");
+  updateAuthUI(user);
+  loadUserUsage();
+}
+
+// ===== فحص الجلسة عند الفتح =====
+(async () => {
+  const { data: { session } } = await supabase.auth.getSession();
+  if (session?.user) {
+    openApp(session.user);
+  }
+})();
 
 applyPremium();
 renderCounter();
