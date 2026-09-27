@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مساعدك — صياغة احترافية بنقرة واحدة</title>
+<style>
+:root{
+  --gold:#e8c860;
+  --gold-2:#f7dc85;
+  --text:#f2f2f7;
+  --muted:#a8a8b3;
+  --bg:#050507;
+  --glass:rgba(255,255,255,.10);
+  --glass-2:rgba(255,255,255,.14);
+  --stroke:rgba(255,255,255,.18);
+  --stroke-2:rgba(255,255,255,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{height:auto}body{height:auto}
+body{
+  font-family:-apple-system,'SF Pro Display','Segoe UI',Tahoma,sans-serif;
+  color:var(--text);
+  min-height:100vh;
+display:flex;flex-direction:column;align-items:center;
+  padding:26px 16px 40px;
+  background:var(--bg);
+  position:relative;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  letter-spacing:.2px;
+}
+
+/* ===== خلفية ملونة قوية للزجاج ===== */
+body::before{
+  content:"";
+  position:fixed;inset:-25%;
+  background:
+    radial-gradient(closest-side at 20% 15%, #e8b93a 0%, transparent 55%),
+    radial-gradient(closest-side at 85% 25%, #5b4bd6 0%, transparent 55%),
+    radial-gradient(closest-side at 65% 90%, #c8387a 0%, transparent 55%),
+    radial-gradient(closest-side at 10% 85%, #1ea6b8 0%, transparent 55%);
+  filter:blur(45px);
+  opacity:.95;
+  
+  z-index:-2;
+}
+body::after{
+  content:"";
+  position:fixed;inset:0;
+  background:linear-gradient(180deg, rgba(5,5,7,.35) 0%, rgba(5,5,7,.55) 50%, rgba(5,5,7,.75) 100%);
+  z-index:-1;
+}
+
+/* ===== الهيدر ===== */
+header{text-align:center;margin-bottom:24px;z-index:1}
+h1{
+  font-size:2.3rem;font-weight:800;letter-spacing:1px;
+  background:linear-gradient(180deg,#fff8e0,#e8c860 55%,#b8912f);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 6px 24px rgba(232,200,96,.55));
+  margin-bottom:4px;
+}
+header p{color:var(--muted);font-size:.88rem;font-weight:500}
+
+/* ===== التابات ===== */
+.tabs{
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+  margin-bottom:20px;width:100%;max-width:600px;z-index:1;
+  padding:6px;
+  background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04)), rgba(15,15,22,.55);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:18px;
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+}
+.tab{
+  padding:9px 16px;border-radius:12px;cursor:pointer;
+  background:transparent;
+  border:1px solid transparent;
+  color:#d4d4de;font-size:.86rem;font-weight:600;
+  transition:background .15s, color .15s, border-color .15s;
+}
+.tab:hover{color:#fff;background:rgba(255,255,255,.08)}
+.tab.active{
+  background:linear-gradient(180deg,#f7dc85,#e8c860 55%,#d0a840);
+  color:#1a1408;font-weight:800;
+  box-shadow:0 6px 18px rgba(232,200,96,.5), inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+/* ===== الكارت الرئيسي ===== */
+.card{
+  position:relative;
+  width:100%;max-width:600px;
+  background:linear-gradient(180deg, rgba(255,255,255,.13) 0%, rgba(255,255,255,.06) 100%), linear-gradient(180deg, rgba(20,20,30,.78) 0%, rgba(12,12,20,.82) 100%);
+  border:1px solid var(--stroke);
+  border-radius:26px;
+  padding:24px;
+  box-shadow:0 12px 30px rgba(0,0,0,.4);
+  z-index:1;
+  overflow:hidden;
+}
+/* اللمعة العلوية */
+.card::before{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:50%;
+  background:linear-gradient(180deg, rgba(255,255,255,.10), transparent);
+  pointer-events:none;border-radius:26px 26px 0 0;
+}
+.card > *{position:relative;z-index:1}
+.card::after{
+  content:"";
+  position:absolute;
+  top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent);
+  pointer-events:none;
+}
+
+/* ===== الحقول ===== */
+label{
+  display:block;margin-bottom:6px;color:#c8c8d4;
+  font-size:.82rem;font-weight:600;letter-spacing:.3px;
+}
+input,textarea,select{
+  width:100%;padding:13px 15px;margin-bottom:10px;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.35));
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:14px;
+  color:var(--text);font-size:.93rem;font-family:inherit;
+  resize:vertical;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.4);
+  transition:border-color .2s, box-shadow .2s, background .2s;
+}
+input::placeholder,textarea::placeholder{color:#8a8a96}
+input:focus,textarea:focus,select:focus{
+  outline:none;
+  border-color:rgba(232,200,96,.6);
+  background:rgba(0,0,0,.45);
+  box-shadow:inset 0 1px 2px rgba(0,0,0,.4), 0 0 0 4px rgba(232,200,96,.18);
+}
+select option{background:#12121a;color:var(--text)}
+
+/* ===== الزر ===== */
+button.go{
+  width:100%;padding:16px;border:none;border-radius:16px;
+  background:linear-gradient(180deg,#f7dc85,#e8c860 50%,#c9a227);
+  color:#1a1408;font-size:1rem;font-weight:800;
+  cursor:pointer;letter-spacing:.4px;
+  box-shadow:0 6px 16px rgba(232,200,96,.4);
+  transition:transform .1s ease, box-shadow .15s ease;
+}
+button.go:hover:not(:disabled){
+  transform:translateY(-1px);
+  filter:brightness(1.05);
+  box-shadow:0 14px 32px rgba(232,200,96,.6), inset 0 1px 0 rgba(255,255,255,.8);
+}
+button.go:active:not(:disabled){transform:translateY(1px) scale(.99)}
+button.go:disabled{opacity:.55;cursor:not-allowed}
+
+/* ===== النتيجة ===== */
+.out{
+  margin:10px 0;padding:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.35));
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:14px;
+  min-height:50px;overflow:visible;
+  white-space:pre-wrap;line-height:1.8;
+  display:none;font-size:.93rem;color:#f2f2f7;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.4);
+}
+.out.show{display:block;animation:fadeIn .35s cubic-bezier(.4,0,.2,1)}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== العدّاد ===== */
+.counter{
+  text-align:center;margin-top:10px;padding:9px;
+  background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03)), rgba(15,15,22,.5);
+  border-radius:12px;color:#c8c8d4;font-size:.82rem;font-weight:500;
+  border:1px solid var(--stroke);
+}
+.counter.low{color:#f7c860;border-color:rgba(247,200,96,.4)}
+.counter.out-of-credits{color:#ff8080;font-weight:700;border-color:rgba(255,128,128,.4)}
+
+
+/* ===== وضع البريميوم ===== */
+body.premium{
+  --gold:#c9a227;
+  --gold-2:#e0be45;
+}
+body.premium::before{
+  background:
+    radial-gradient(closest-side at 20% 15%, #8b5cf6 0%, transparent 55%),
+    radial-gradient(closest-side at 85% 25%, #6d28d9 0%, transparent 55%),
+    radial-gradient(closest-side at 65% 90%, #a855f7 0%, transparent 55%),
+    radial-gradient(closest-side at 10% 85%, #e8c860 0%, transparent 55%);
+}
+body.premium h1{
+  background:linear-gradient(180deg,#fff8e0,#e8c860 40%,#a855f7 90%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+body.premium .card{
+  border-color:rgba(168,85,247,.35);
+}
+body.premium button.go,
+body.premium .tab.active{
+  background:linear-gradient(180deg,#e0be45,#c9a227 50%,#a855f7);
+}
+.premium-badge{
+  display:none;
+  margin-top:8px;
+  padding:5px 14px;
+  background:linear-gradient(135deg, #a855f7, #e8c860);
+  color:#1a1408;
+  font-size:.75rem;font-weight:800;
+  border-radius:20px;
+  letter-spacing:.5px;
+  box-shadow:0 4px 14px rgba(168,85,247,.4);
+}
+body.premium .premium-badge{display:inline-block}
+
+/* زر سري للمالك */
+.secret-btn{
+  position:fixed;
+  bottom:14px;left:14px;
+  width:36px;height:36px;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  color:rgba(255,255,255,.3);
+  font-size:.75rem;
+  cursor:pointer;
+  z-index:50;
+  font-family:inherit;
+  transition:all .2s;
+}
+.secret-btn:hover{
+  background:rgba(232,200,96,.2);
+  color:#f7dc85;
+}
+
+
+.plans{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:16px 4px 20px;
+  margin:16px -8px;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.plans::-webkit-scrollbar{display:none}
+.plan-wrap{
+  display:flex;flex-direction:column;
+  flex:0 0 240px;
+  scroll-snap-align:center;
+}
+.plan{
+  position:relative;
+  padding:18px 14px;
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  display:flex;flex-direction:column;
+  text-align:center;
+  min-height:120px;
+  justify-content:center;
+}
+.plan.featured{
+  border:1px solid rgba(232,200,96,.6);
+  background:linear-gradient(180deg, rgba(232,200,96,.12), rgba(232,200,96,.04));
+  box-shadow:0 8px 24px rgba(232,200,96,.2);
+}
+.plan-badge{
+  position:absolute;top:-9px;right:50%;transform:translateX(50%);
+  padding:3px 10px;
+  background:linear-gradient(180deg,#f7dc85,#e8c860 50%,#c9a227);
+  color:#1a1408;font-size:.6rem;font-weight:800;
+  border-radius:8px;letter-spacing:.2px;
+  box-shadow:0 4px 12px rgba(232,200,96,.5);
+  white-space:nowrap;
+}
+.plan-info{text-align:center;margin-bottom:8px}
+.plan-duration{font-size:1.05rem;font-weight:800;color:#f2f2f7;margin-bottom:4px}
+.plan-permonth{font-size:.72rem;color:#a8a8b3;font-weight:500}
+.plan-price{text-align:center}
+.plan-amount{font-size:1.5rem;font-weight:800;color:#f7dc85;line-height:1}
+.plan-currency{font-size:.75rem;color:#a8a8b3;font-weight:600;margin-right:3px}
+.plan-btn{
+  width:100%;margin-top:10px;padding:10px;border:none;border-radius:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+  border:1px solid rgba(255,255,255,.16);
+  color:#f2f2f7;font-size:.82rem;font-weight:700;
+  cursor:pointer;letter-spacing:.2px;font-family:inherit;
+}
+.plan-wrap:has(.plan.featured) .plan-btn{
+  background:linear-gradient(180deg,#f7dc85,#e8c860 50%,#c9a227);
+  color:#1a1408;border:none;box-shadow:0 6px 16px rgba(232,200,96,.4);
+}
+.plan-btn:active{transform:scale(.97)}
+
+/* بطاقة السنوي — شكل بريميوم بنفسجي */
+.plan.plan-annual{
+  background:linear-gradient(180deg, rgba(168,85,247,.22), rgba(139,92,246,.10)) !important;
+  border:1px solid rgba(168,85,247,.65) !important;
+  box-shadow:0 8px 28px rgba(168,85,247,.35) !important;
+}
+.plan.plan-annual .plan-duration{color:#e0be45}
+.plan.plan-annual .plan-amount{
+  background:linear-gradient(135deg,#e8c860,#a855f7);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.plan.plan-annual .plan-permonth{color:#c4b0f0}
+.plan.plan-annual .plan-badge{
+  background:linear-gradient(135deg,#a855f7,#8b5cf6 50%,#6d28d9) !important;
+  color:#fff !important;
+  box-shadow:0 4px 14px rgba(168,85,247,.55) !important;
+}
+.plan-wrap:has(.plan-annual) .plan-btn{
+  background:linear-gradient(135deg,#a855f7,#8b5cf6 50%,#c9a227) !important;
+  color:#fff !important;
+  border:none !important;
+  box-shadow:0 6px 20px rgba(168,85,247,.5) !important;
+}
+.plan.plan-annual .plan-features li::before{color:#c4b0f0}
+
+/* بطاقة 6 شهور — ذهبية */
+.plan.plan-gold{
+  background:linear-gradient(180deg, rgba(232,200,96,.20), rgba(201,162,39,.08));
+  border:1px solid rgba(232,200,96,.55);
+  box-shadow:0 8px 24px rgba(232,200,96,.28);
+}
+.plan.plan-gold .plan-duration{color:#f7dc85}
+
+/* بطاقة 3 شهور — فضية */
+.plan.plan-silver{
+  background:linear-gradient(180deg, rgba(220,220,230,.18), rgba(180,180,195,.08));
+  border:1px solid rgba(220,220,230,.5);
+  box-shadow:0 8px 24px rgba(200,200,220,.22);
+}
+.plan.plan-silver .plan-duration{color:#e8e8f0}
+.plan.plan-silver .plan-amount{
+  background:linear-gradient(135deg,#ffffff,#d0d0dc 60%,#a0a0b0);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.plan.plan-silver .plan-permonth{color:#d0d0dc}
+.plan.plan-silver .plan-badge{
+  background:linear-gradient(180deg,#f0f0f8,#d0d0dc 50%,#a0a0b0);
+  color:#1a1a22;
+  box-shadow:0 4px 14px rgba(200,200,220,.5);
+}
+.plan-wrap:has(.plan-silver) .plan-btn{
+  background:linear-gradient(180deg,#f0f0f8,#d0d0dc 50%,#a0a0b0);
+  color:#1a1a22;
+  border:none;
+  box-shadow:0 6px 18px rgba(200,200,220,.45);
+}
+.plan.plan-silver .plan-features li::before{color:#e0e0ec}
+
+.plan.plan-gold .plan-amount{
+  background:linear-gradient(135deg,#fff8e0,#e8c860 60%,#c9a227);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+}
+.plan.plan-gold .plan-permonth{color:#e0c890}
+.plan.plan-gold .plan-badge{
+  background:linear-gradient(180deg,#f7dc85,#e8c860 50%,#c9a227);
+  color:#1a1408;
+  box-shadow:0 4px 14px rgba(232,200,96,.55);
+}
+.plan-wrap:has(.plan-gold) .plan-btn{
+  background:linear-gradient(180deg,#f7dc85,#e8c860 50%,#c9a227);
+  color:#1a1408;
+  border:none;
+  box-shadow:0 6px 18px rgba(232,200,96,.5);
+}
+
+
+
+.plan-features{
+  list-style:none;padding:0;margin:12px 0 0;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding-top:10px;
+}
+.plan-features li{
+  font-size:.72rem;color:#c8c8d4;
+  padding:4px 0;text-align:right;
+  padding-right:16px;position:relative;
+  font-weight:500;
+}
+.plan-features li::before{
+  content:"✓";
+  position:absolute;right:0;
+  color:#e8c860;font-weight:800;
+  font-size:.75rem;
+}
+
+.hidden{display:none}
+.copy-btn{width:100%;padding:12px;margin-bottom:12px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(232,200,96,.4);color:#f7dc85;font-size:.92rem;font-weight:700;cursor:pointer;letter-spacing:.3px;transition:all .2s ease}
+.copy-btn:hover{background:rgba(232,200,96,.15);border-color:rgba(232,200,96,.7);transform:translateY(-1px)}
+.copy-btn:active{transform:translateY(0) scale(.99)}
+
+/* ===== كارت الاشتراك ===== */
+.subscribe-card{
+  position:relative;
+  margin-top:16px;
+  padding:26px 22px;
+  background:linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.06) 100%), linear-gradient(180deg, rgba(25,22,15,.8), rgba(15,13,8,.85));
+  border:1px solid rgba(232,200,96,.35);
+  border-radius:24px;
+  overflow:hidden;
+  text-align:center;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.15),
+    0 0 0 1px rgba(232,200,96,.08);
+  animation:fadeIn .5s cubic-bezier(.4,0,.2,1);
+}
+.subscribe-content{position:relative;z-index:1}
+.subscribe-title{
+  font-size:1.35rem;
+  font-weight:800;
+  color:#f7dc85;
+  margin-bottom:6px;
+  letter-spacing:.3px;
+  text-shadow:0 2px 12px rgba(232,200,96,.4);
+}
+.subscribe-text{
+  color:#c8c8d4;
+  font-size:.9rem;
+  line-height:1.6;
+  margin-bottom:16px;
+  max-width:380px;
+  margin-left:auto;margin-right:auto;
+}
+
+@media (max-width:520px){
+  body{padding:18px 14px 32px}
+  h1{font-size:1.95rem}
+  .card{padding:20px;border-radius:22px}
+  .tabs{border-radius:16px}
+  .tab{padding:8px 13px;font-size:.8rem}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>مساعدك</h1>
+  <p id="tagline">صياغة احترافية بنقرة واحدة</p>
+  <div class="premium-badge">مشترك بريميوم · استخدامات غير محدودة</div>
+</header>
+
+<div class="tabs">
+  <div class="tab active" data-mode="translate">ترجمة</div>
+  <div class="tab" data-mode="rewrite">صياغة</div>
+  <div class="tab" data-mode="product">وصف منتج</div>
+  <div class="tab" data-mode="ideas">أفكار محتوى</div>
+</div>
+
+<div class="card">
+  <div id="pane-translate" class="pane">
+    <label>النص</label>
+    <textarea id="tr-text" rows="3" placeholder="أدخل النص هنا..."></textarea>
+    <label>من لغة</label>
+    <select id="tr-from">
+      <option value="auto" selected>كشف تلقائي</option>
+      <option value="العربية">العربية</option>
+      <option value="الإنجليزية">الإنجليزية</option>
+      <option value="الفرنسية">الفرنسية</option>
+      <option value="الإسبانية">الإسبانية</option>
+      <option value="الألمانية">الألمانية</option>
+      <option value="الإيطالية">الإيطالية</option>
+      <option value="البرتغالية">البرتغالية</option>
+      <option value="الروسية">الروسية</option>
+      <option value="التركية">التركية</option>
+      <option value="الفارسية">الفارسية</option>
+      <option value="الأردية">الأردية</option>
+      <option value="الهندية">الهندية</option>
+      <option value="الصينية">الصينية</option>
+      <option value="اليابانية">اليابانية</option>
+      <option value="الكورية">الكورية</option>
+      <option value="العبرية">العبرية</option>
+      <option value="اليونانية">اليونانية</option>
+      <option value="الهولندية">الهولندية</option>
+      <option value="السويدية">السويدية</option>
+      <option value="البولندية">البولندية</option>
+      <option value="الأوكرانية">الأوكرانية</option>
+      <option value="الإندونيسية">الإندونيسية</option>
+      <option value="الماليزية">الماليزية</option>
+      <option value="التايلاندية">التايلاندية</option>
+      <option value="الفيتنامية">الفيتنامية</option>
+    </select>
+
+    <label>إلى لغة</label>
+    <select id="tr-to">
+      <option value="الإنجليزية" selected>الإنجليزية</option>
+      <option value="العربية">العربية</option>
+      <option value="الفرنسية">الفرنسية</option>
+      <option value="الإسبانية">الإسبانية</option>
+      <option value="الألمانية">الألمانية</option>
+      <option value="الإيطالية">الإيطالية</option>
+      <option value="البرتغالية">البرتغالية</option>
+      <option value="الروسية">الروسية</option>
+      <option value="التركية">التركية</option>
+      <option value="الفارسية">الفارسية</option>
+      <option value="الأردية">الأردية</option>
+      <option value="الهندية">الهندية</option>
+      <option value="الصينية">الصينية</option>
+      <option value="اليابانية">اليابانية</option>
+      <option value="الكورية">الكورية</option>
+      <option value="العبرية">العبرية</option>
+      <option value="اليونانية">اليونانية</option>
+      <option value="الهولندية">الهولندية</option>
+      <option value="السويدية">السويدية</option>
+      <option value="البولندية">البولندية</option>
+      <option value="الأوكرانية">الأوكرانية</option>
+      <option value="الإندونيسية">الإندونيسية</option>
+      <option value="الماليزية">الماليزية</option>
+      <option value="التايلاندية">التايلاندية</option>
+      <option value="الفيتنامية">الفيتنامية</option>
+    </select>
+  </div>
+
+  <div id="pane-rewrite" class="pane hidden">
+    <label>ما الذي تريد قوله؟</label>
+    <textarea id="rw-text" rows="3" placeholder="مثال: أرغب بإبلاغ المدير بتأخري غداً..."></textarea>
+    <label>نبرة الخطاب</label>
+    <select id="rw-tone">
+      <option value="رسمي">رسمي</option>
+      <option value="لبق ومهني">لبق ومهني</option>
+      <option value="ودّي مع صديق">ودّي مع صديق</option>
+      <option value="حازم">حازم</option>
+      <option value="مقنع للعميل">مقنع للعميل</option>
+    </select>
+  </div>
+
+  <div id="pane-product" class="pane hidden">
+    <label>حجم الوصف</label>
+    <select id="pr-size">
+      <option value="قصير جداً — سطر أو سطرين">قصير جداً — سطر أو سطرين</option>
+      <option value="قصير — 3 إلى 5 أسطر">قصير — 3 إلى 5 أسطر</option>
+      <option value="متوسط — فقرة كاملة" selected>متوسط — فقرة كاملة</option>
+      <option value="طويل — وصف مفصل">طويل — وصف مفصل</option>
+    </select>
+    <label>اسم المنتج</label>
+    <input id="pr-name" placeholder="مثال: عسل جبلي">
+    <label>أبرز المزايا</label>
+    <textarea id="pr-feat" rows="2" placeholder="طبيعي 100%، من جبال الطائف، بدون سكر..."></textarea>
+  </div>
+
+  <div id="pane-ideas" class="pane hidden">
+    <label>مجال عملك</label>
+    <input id="id-field" placeholder="مثال: تسويق عقاري، طبخ، لياقة">
+  </div>
+
+  <div class="out" id="out"></div>
+  <button class="copy-btn hidden" id="copyBtn">نسخ</button>
+  <button class="go" id="run">تنفيذ</button>
+  <div class="counter" id="counter"></div>
+
+  <div class="subscribe-card hidden" id="subscribeCard">
+    <div class="subscribe-content">
+      <h2 class="subscribe-title">وصلت لحدك المجاني</h2>
+      <p class="subscribe-text">اختر الباقة المناسبة لك وكمّل بدون توقف</p>
+
+      <div class="plans">
+        <div class="plan-wrap">
+          <div class="plan">
+            <div class="plan-info">
+              <div class="plan-duration">شهري</div>
+              <div class="plan-permonth">249.99ج / شهر</div>
+            </div>
+            <div class="plan-price">
+              <span class="plan-amount">249.99</span>
+              <span class="plan-currency">ج</span>
+            </div>
+            <ul class="plan-features">
+              <li>استخدامات غير محدودة</li>
+              <li>كل الأوضاع</li>
+              <li>26 لغة</li>
+              <li>نسخ النتيجة</li>
+            </ul>
+          </div>
+          <button class="plan-btn" data-plan="شهري" data-price="249.99">اشترك شهرياً</button>
+        </div>
+
+        <div class="plan-wrap">
+          <div class="plan plan-silver">
+            <div class="plan-badge">وفّر 50ج</div>
+            <div class="plan-info">
+              <div class="plan-duration">3 شهور</div>
+              <div class="plan-permonth">233.33ج / شهر</div>
+            </div>
+            <div class="plan-price">
+              <span class="plan-amount">699.99</span>
+              <span class="plan-currency">ج</span>
+            </div>
+            <ul class="plan-features">
+              <li>استخدامات غير محدودة</li>
+              <li>كل الأوضاع</li>
+              <li>26 لغة</li>
+              <li>نسخ النتيجة</li>
+            </ul>
+          </div>
+          <button class="plan-btn" data-plan="3 شهور" data-price="699.99">اشترك 3 شهور</button>
+        </div>
+
+        <div class="plan-wrap">
+          <div class="plan plan-gold">
+            <div class="plan-badge">وفّر 150ج</div>
+            <div class="plan-info">
+              <div class="plan-duration">6 شهور</div>
+              <div class="plan-permonth">225.00ج / شهر</div>
+            </div>
+            <div class="plan-price">
+              <span class="plan-amount">1,349.99</span>
+              <span class="plan-currency">ج</span>
+            </div>
+            <ul class="plan-features">
+              <li>استخدامات غير محدودة</li>
+              <li>كل الأوضاع</li>
+              <li>26 لغة</li>
+              <li>نسخ النتيجة</li>
+            </ul>
+          </div>
+          <button class="plan-btn" data-plan="6 شهور" data-price="1349.99">اشترك 6 شهور</button>
+        </div>
+
+        <div class="plan-wrap">
+          <div class="plan featured plan-annual">
+            <div class="plan-badge">الأكثر طلباً — وفّر 500ج</div>
+            <div class="plan-info">
+              <div class="plan-duration">سنوي</div>
+              <div class="plan-permonth">208.33ج / شهر</div>
+            </div>
+            <div class="plan-price">
+              <span class="plan-amount">2,499.99</span>
+              <span class="plan-currency">ج</span>
+            </div>
+            <ul class="plan-features">
+              <li>استخدامات غير محدودة</li>
+              <li>كل الأوضاع</li>
+              <li>26 لغة</li>
+              <li>نسخ النتيجة</li>
+              <li style="color:#c4b0f0;font-weight:700;">واجهة بريميوم حصرية</li>
+            </ul>
+          </div>
+          <button class="plan-btn" data-plan="سنوي" data-price="2499.99">اشترك سنوياً</button>
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+<button class="secret-btn" id="secretBtn" title="وضع المالك">★</button>
+
+<script>
+const FREE_LIMIT = 12;
+const TOTAL_KEY = "msaadak_v6";
+let currentMode = "translate";
+
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    currentMode = tab.dataset.mode;
+    document.querySelectorAll(".pane").forEach(p => p.classList.add("hidden"));
+    document.getElementById("pane-" + currentMode).classList.remove("hidden");
+    document.getElementById("out").classList.remove("show");
+    document.getElementById("out").textContent = "";
+    document.getElementById("copyBtn").classList.add("hidden");
+    const taglines = {
+      translate: "ترجمة دقيقة تحفظ روح النص",
+      rewrite:   "أعد صياغة رسالتك بالنبرة المناسبة",
+      product:   "أوصاف تسويقية تجعل منتجك يبيع",
+      ideas:     "أفكار محتوى لا تنتهي"
+    };
+    document.getElementById("tagline").textContent = taglines[currentMode] || "";
+  });
+});
+
+function getUsage() {
+  const raw = localStorage.getItem(TOTAL_KEY);
+  return raw ? JSON.parse(raw) : { count: 0 };
+}
+
+function bumpUsage() {
+  if (isPremium()) return;
+  const u = getUsage();
+  u.count += 1;
+  localStorage.setItem(TOTAL_KEY, JSON.stringify(u));
+  renderCounter();
+}
+
+function renderCounter() {
+  if (isPremium()) { document.getElementById("counter").style.display="none"; return; }
+  const u = getUsage();
+  const left = Math.max(0, FREE_LIMIT - u.count);
+  const el = document.getElementById("counter");
+  const card = document.getElementById("subscribeCard");
+  el.classList.remove("low", "out-of-credits");
+  if (left > 0) {
+    el.style.display = "";
+    el.textContent = "المتبقي: " + left + " من " + FREE_LIMIT + " استخدامات مجانية";
+    card.classList.add("hidden");
+  } else {
+    el.style.display = "none";
+    card.classList.remove("hidden");
+  }
+}
+
+function buildPrompt() {
+  if (currentMode === "translate") {
+    const text = document.getElementById("tr-text").value.trim();
+    const from = document.getElementById("tr-from").value;
+    const to = document.getElementById("tr-to").value;
+    if (!text) return null;
+    const fromPart = from === "auto" ? "اكتشف لغة النص تلقائياً ثم" : `من اللغة ${from}`;
+    return `ترجم النص التالي ${fromPart} إلى اللغة ${to}، وحافظ على الأسلوب (لو عامية خليها مفهومة). أعطني الترجمة فقط:\n\n${text}`;
+  }
+  if (currentMode === "rewrite") {
+    const text = document.getElementById("rw-text").value.trim();
+    const tone = document.getElementById("rw-tone").value;
+    if (!text) return null;
+    return `أعد صياغة الرسالة التالية بأسلوب ${tone}، واجعلها جاهزة للإرسال مباشرة. أعطني الرسالة فقط:\n\n${text}`;
+  }
+  if (currentMode === "product") {
+    const name = document.getElementById("pr-name").value.trim();
+    const feat = document.getElementById("pr-feat").value.trim();
+    if (!name) return null;
+    const size = document.getElementById("pr-size").value;
+    return `اكتب وصفاً تسويقياً جذاباً لمنتج اسمه "${name}" ومميزاته: ${feat || "غير محددة"}.\nحجم الوصف المطلوب: ${size}.\nاكتب وصفاً واحداً فقط بالحجم المطلوب، بدون مقدمات.`;
+  }
+  if (currentMode === "ideas") {
+    const field = document.getElementById("id-field").value.trim();
+    if (!field) return null;
+    return `أعطني 10 أفكار محتوى مبتكرة ومحددة لمجال "${field}"، كل فكرة في سطر مع جملة توضيحية قصيرة.`;
+  }
+  return null;
+}
+
+const copyBtn = document.getElementById("copyBtn");
+copyBtn.addEventListener("click", async () => {
+  const txt = document.getElementById("out").textContent;
+  if (!txt) return;
+  try { await navigator.clipboard.writeText(txt); } catch (e) {
+    const ta = document.createElement("textarea"); ta.value = txt;
+    document.body.appendChild(ta); ta.select();
+    document.execCommand("copy"); document.body.removeChild(ta);
+  }
+  copyBtn.textContent = "تم النسخ";
+  setTimeout(() => { copyBtn.textContent = "نسخ"; }, 1500);
+});
+
+document.querySelectorAll(".plan-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const plan = btn.dataset.plan;
+    const price = btn.dataset.price;
+    alert("قريباً — اشتراك " + plan + " بمبلغ " + price + "ج عبر بوابة دفع آمنة");
+  });
+});
+
+document.getElementById("run").addEventListener("click", async () => {
+  const prompt = buildPrompt();
+  const out = document.getElementById("out");
+  if (!prompt) {
+    out.textContent = "الرجاء إدخال البيانات المطلوبة أولاً.";
+    out.classList.add("show");
+    return;
+  }
+  const usage = getUsage();
+  if (!isPremium() && usage.count >= FREE_LIMIT) {
+    document.getElementById("counter").style.display = "none";
+    document.getElementById("subscribeCard").classList.remove("hidden");
+    return;
+  }
+  const btn = document.getElementById("run");
+  btn.disabled = true;
+  btn.textContent = "جارٍ التنفيذ...";
+  out.classList.add("show");
+  out.textContent = "…";
+  try {
+    const res = await fetch("https://msaadak-api.mrk161747.workers.dev/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: prompt })
+    });
+    const data = await res.json();
+    const txt = data.choices?.[0]?.message?.content;
+    if (txt) {
+      out.textContent = txt;
+      document.getElementById("copyBtn").classList.remove("hidden");
+      bumpUsage();
+    } else {
+      out.textContent = "⚠️ الخدمة تحت الصيانة ⚠️\n❤️ شكراً لصبركم وتفهمكم ❤️";
+    }
+  } catch (e) {
+    out.textContent = "⚠️ الخدمة تحت الصيانة ⚠️\n❤️ شكراً لصبركم وتفهمكم ❤️";
+  }
+  btn.disabled = false;
+  btn.textContent = "تنفيذ";
+});
+
+// ===== وضع البريميوم =====
+const PREMIUM_KEY = "msaadak_premium";
+
+function isPremium() {
+  return localStorage.getItem(PREMIUM_KEY) === "1";
+}
+
+function applyPremium() {
+  const on = isPremium();
+  document.body.classList.toggle("premium", on);
+  if (on) {
+    document.getElementById("counter").style.display = "none";
+    document.getElementById("subscribeCard").classList.add("hidden");
+  }
+}
+
+document.getElementById("secretBtn").addEventListener("click", () => {
+  if (isPremium()) {
+    localStorage.removeItem(PREMIUM_KEY);
+    alert("تم إيقاف وضع البريميوم");
+  } else {
+    localStorage.setItem(PREMIUM_KEY, "1");
+    alert("تم تفعيل وضع البريميوم ✨");
+  }
+  location.reload();
+});
+
+applyPremium();
+renderCounter();
+</script>
+</body>
+</html>
