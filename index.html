@@ -834,7 +834,7 @@ body.premium .premium-badge{display:inline-block}
 </div>
 
 <script>
-const FREE_LIMIT = 12;
+const TRIAL_DAYS = 7;
 const TOTAL_KEY = "msaadak_v6";
 let currentMode = "translate";
 
@@ -858,29 +858,46 @@ document.querySelectorAll(".tab").forEach(tab => {
   });
 });
 
-function getUsage() {
-  const raw = localStorage.getItem(TOTAL_KEY);
-  return raw ? JSON.parse(raw) : { count: 0 };
+let trialStart = null;
+
+function daysLeftInTrial() {
+  if (!trialStart) return TRIAL_DAYS;
+  const ms = Date.now() - new Date(trialStart).getTime();
+  const days = ms / (1000 * 60 * 60 * 24);
+  return Math.max(0, TRIAL_DAYS - Math.floor(days));
 }
 
-function bumpUsage() {
-  if (isPremium()) return;
-  const u = getUsage();
-  u.count += 1;
-  localStorage.setItem(TOTAL_KEY, JSON.stringify(u));
+async function startTrialIfNeeded() {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return;
+  const { data } = await supabase
+    .from("usage")
+    .select("trial_started_at")
+    .eq("user_id", user.id)
+    .maybeSingle();
+  if (data && data.trial_started_at) {
+    trialStart = data.trial_started_at;
+  } else {
+    const now = new Date().toISOString();
+    await supabase.from("usage").upsert({
+      user_id: user.id,
+      trial_started_at: now,
+      count: 0
+    });
+    trialStart = now;
+  }
   renderCounter();
 }
 
 function renderCounter() {
   if (isPremium()) { document.getElementById("counter").style.display="none"; return; }
-  const u = getUsage();
-  const left = Math.max(0, FREE_LIMIT - u.count);
+  const left = daysLeftInTrial();
   const el = document.getElementById("counter");
   const card = document.getElementById("subscribeCard");
   el.classList.remove("low", "out-of-credits");
   if (left > 0) {
     el.style.display = "";
-    el.textContent = "المتبقي: " + left + " من " + FREE_LIMIT + " استخدامات مجانية";
+    el.textContent = "متبقي " + left + " من " + TRIAL_DAYS + " أيام تجريبية";
     card.classList.add("hidden");
   } else {
     el.style.display = "none";
@@ -978,8 +995,7 @@ document.getElementById("run").addEventListener("click", async () => {
     out.classList.add("show");
     return;
   }
-  const usage = getUsage();
-  if (!isPremium() && usage.count >= FREE_LIMIT) {
+  if (!isPremium() && daysLeftInTrial() <= 0) {
     document.getElementById("counter").style.display = "none";
     document.getElementById("subscribeCard").classList.remove("hidden");
     return;
@@ -1000,7 +1016,6 @@ document.getElementById("run").addEventListener("click", async () => {
     if (txt) {
       out.textContent = txt;
       document.getElementById("copyBtn").classList.remove("hidden");
-      bumpUsage();
     } else {
       out.textContent = "⚠️ الخدمة تحت الصيانة ⚠️\n❤️ شكراً لصبركم وتفهمكم ❤️";
     }
@@ -1115,7 +1130,7 @@ gateSubmit.addEventListener("click", async () => {
 function openApp(user) {
   authGate.classList.add("hidden");
   updateAuthUI(user);
-  loadUserUsage();
+  startTrialIfNeeded();
 }
 
 function updateAuthUI(user) {
@@ -1132,19 +1147,7 @@ function updateAuthUI(user) {
   }
 }
 
-async function loadUserUsage() {
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return;
-  const { data } = await supabase
-    .from("usage")
-    .select("count")
-    .eq("user_id", user.id)
-    .maybeSingle();
-  if (data) {
-    localStorage.setItem(TOTAL_KEY, JSON.stringify({ count: data.count }));
-    renderCounter();
-  }
-}
+
 
 // ===== فحص الجلسة عند الفتح =====
 (async () => {
