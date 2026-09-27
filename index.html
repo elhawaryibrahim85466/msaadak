@@ -794,6 +794,18 @@ body.premium .premium-badge{display:inline-block}
 
 
 
+
+<div class="admin-modal hidden" id="adminModal">
+  <div class="admin-modal-content">
+    <button class="admin-close" id="adminClose">×</button>
+    <h2 class="admin-title">دخول المالك</h2>
+    <p class="admin-sub">أدخل كلمة المرور</p>
+    <input type="password" id="adminPass" placeholder="كلمة المرور" class="admin-input">
+    <button class="admin-submit" id="adminSubmit">دخول</button>
+    <p class="admin-msg" id="adminMsg"></p>
+  </div>
+</div>
+
 <script>
 const FREE_LIMIT = 12;
 const TOTAL_KEY = "msaadak_v6";
@@ -1167,17 +1179,6 @@ applyPremium();
 renderCounter();
 });
 </script>
-
-<div class="admin-modal hidden" id="adminModal">
-  <div class="admin-modal-content">
-    <button class="admin-close" id="adminClose">×</button>
-    <h2 class="admin-title">دخول المالك</h2>
-    <p class="admin-sub">أدخل كلمة المرور</p>
-    <input type="password" id="adminPass" placeholder="كلمة المرور" class="admin-input">
-    <button class="admin-submit" id="adminSubmit">دخول</button>
-    <p class="admin-msg" id="adminMsg"></p>
-  </div>
-</div>
 
 </body>
 </html>
