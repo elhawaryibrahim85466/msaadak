@@ -893,25 +893,52 @@ function buildPrompt() {
     const to = document.getElementById("tr-to").value;
     if (!text) return null;
     const fromPart = from === "auto" ? "اكتشف لغة النص تلقائياً ثم" : `من اللغة ${from}`;
-    return `ترجم النص التالي ${fromPart} إلى اللغة ${to}، وحافظ على الأسلوب (لو عامية خليها مفهومة). أعطني الترجمة فقط:\n\n${text}`;
+    return `أنت مترجم محترف. ترجم النص التالي ${fromPart} إلى اللغة ${to}.
+قواعد:
+- أعطِ الترجمة فقط، بدون أي مقدمة أو تعليق.
+- حافظ على أسلوب النص (عامية → عامية مفهومة، رسمي → رسمي).
+- لا تضف شرحاً.
+
+النص:
+${text}`;
   }
   if (currentMode === "rewrite") {
     const text = document.getElementById("rw-text").value.trim();
     const tone = document.getElementById("rw-tone").value;
     if (!text) return null;
-    return `أعد صياغة الرسالة التالية بأسلوب ${tone}، واجعلها جاهزة للإرسال مباشرة. أعطني الرسالة فقط:\n\n${text}`;
+    return `أنت كاتب محترف. أعد صياغة الرسالة التالية بأسلوب ${tone}.
+قواعد:
+- أعطِ الرسالة الجاهزة فقط، بدون مقدمة أو تعليق.
+- اجعلها طبيعية كأن إنسان كتبها.
+- لا تقل "بالطبع" أو "إليك".
+
+الرسالة:
+${text}`;
   }
   if (currentMode === "product") {
     const name = document.getElementById("pr-name").value.trim();
     const feat = document.getElementById("pr-feat").value.trim();
     if (!name) return null;
     const size = document.getElementById("pr-size").value;
-    return `اكتب وصفاً تسويقياً جذاباً لمنتج اسمه "${name}" ومميزاته: ${feat || "غير محددة"}.\nحجم الوصف المطلوب: ${size}.\nاكتب وصفاً واحداً فقط بالحجم المطلوب، بدون مقدمات.`;
+    return `أنت كاتب إعلانات محترف. اكتب وصفاً تسويقياً لمنتج اسمه "${name}" ومميزاته: ${feat || "غير محددة"}.
+قواعد:
+- الحجم: ${size}.
+- اكتب الوصف فقط، بدون عنوان أو مقدمة.
+- اجعله يبيع، وابدأ بالمنتج مباشرة.
+
+المنتج: ${name}`;
   }
   if (currentMode === "ideas") {
     const field = document.getElementById("id-field").value.trim();
     if (!field) return null;
-    return `أعطني 10 أفكار محتوى مبتكرة ومحددة لمجال "${field}"، كل فكرة في سطر مع جملة توضيحية قصيرة.`;
+    return `أنت خبير محتوى. أعطني 10 أفكار محتوى عملية لمجال "${field}".
+قواعد:
+- كل فكرة في سطر لوحدها.
+- الفكرة + جملة توضيحية قصيرة.
+- محددة وقابلة للتنفيذ.
+- بدون مقدمة أو خاتمة.
+
+المجال: ${field}`;
   }
   return null;
 }
