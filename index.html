@@ -583,7 +583,7 @@ body.premium .premium-badge{display:inline-block}
 </div>
 
 <header>
-  <h1>مساعدك</h1>
+  <button id="logoBtn" class="logo-btn">مساعدك</button>
   <p id="tagline">صياغة احترافية بنقرة واحدة</p>
   <div class="premium-badge">مشترك بريميوم · استخدامات غير محدودة</div>
   <div id="logoutArea" style="margin-top:10px;text-align:center;"></div>
@@ -1109,7 +1109,7 @@ const adminMsg = document.getElementById("adminMsg");
 // 5 ضغطات سريعة على شعار "مساعدك"
 let tapCount = 0;
 let tapTimer = null;
-const logoEl = document.querySelector("header h1");
+const logoEl = document.getElementById("logoBtn");
 if (logoEl) {
   logoEl.addEventListener("click", () => {
     tapCount++;
