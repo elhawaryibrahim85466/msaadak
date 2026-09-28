@@ -75,6 +75,7 @@ header p{color:var(--muted);font-size:.88rem;font-weight:500}
   box-shadow:0 8px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.12);
 }
 .tab{
+  display:inline-flex;align-items:center;gap:6px;
   padding:9px 16px;border-radius:12px;cursor:pointer;
   background:transparent;
   border:1px solid transparent;
@@ -142,7 +143,8 @@ select option{background:#12121a;color:var(--text)}
 
 /* ===== الزر ===== */
 button.go{
-  width:100%;padding:16px;border:none;border-radius:16px;
+  width:100%;padding:16px;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:16px;
   background:linear-gradient(180deg,#f7dc85,#e8c860 50%,#c9a227);
   color:#1a1408;font-size:1rem;font-weight:800;
   cursor:pointer;letter-spacing:.4px;
@@ -612,24 +614,24 @@ body.premium .premium-badge{display:inline-block}
 </div>
 
 <header>
-  <div id="logoBtn">مساعدك</div>
+  <div id="logoBtn">✨ مساعدك</div>
   <p id="tagline">صياغة احترافية بنقرة واحدة</p>
   <div class="premium-badge">مشترك بريميوم · استخدامات غير محدودة</div>
   <div id="logoutArea" style="margin-top:10px;text-align:center;"></div>
 </header>
 
 <div class="tabs">
-  <div class="tab active" data-mode="translate">ترجمة</div>
-  <div class="tab" data-mode="rewrite">صياغة</div>
-  <div class="tab" data-mode="product">وصف منتج</div>
-  <div class="tab" data-mode="ideas">أفكار محتوى</div>
+  <div class="tab active" data-mode="translate">✨ ترجمة</div>
+  <div class="tab" data-mode="rewrite">✏️ صياغة</div>
+  <div class="tab" data-mode="product">📦 وصف منتج</div>
+  <div class="tab" data-mode="ideas">💡 أفكار محتوى</div>
 </div>
 
 <div class="card">
   <div id="pane-translate" class="pane">
-    <label>النص</label>
+    <label>📄 النص</label>
     <textarea id="tr-text" rows="3" placeholder="أدخل النص هنا..."></textarea>
-    <label>من لغة</label>
+    <label>🌐 من لغة</label>
     <select id="tr-from">
       <option value="auto" selected>كشف تلقائي</option>
       <option value="العربية">العربية</option>
@@ -659,7 +661,7 @@ body.premium .premium-badge{display:inline-block}
       <option value="الفيتنامية">الفيتنامية</option>
     </select>
 
-    <label>إلى لغة</label>
+    <label>🌐 إلى لغة</label>
     <select id="tr-to">
       <option value="الإنجليزية" selected>الإنجليزية</option>
       <option value="العربية">العربية</option>
@@ -690,9 +692,9 @@ body.premium .premium-badge{display:inline-block}
   </div>
 
   <div id="pane-rewrite" class="pane hidden">
-    <label>ما الذي تريد قوله؟</label>
+    <label>✏️ ما الذي تريد قوله؟</label>
     <textarea id="rw-text" rows="3" placeholder="مثال: أرغب بإبلاغ المدير بتأخري غداً..."></textarea>
-    <label>نبرة الخطاب</label>
+    <label>🎭 نبرة الخطاب</label>
     <select id="rw-tone">
       <option value="رسمي">رسمي</option>
       <option value="لبق ومهني">لبق ومهني</option>
@@ -703,34 +705,34 @@ body.premium .premium-badge{display:inline-block}
   </div>
 
   <div id="pane-product" class="pane hidden">
-    <label>حجم الوصف</label>
+    <label>📏 حجم الوصف</label>
     <select id="pr-size">
       <option value="قصير جداً — سطر أو سطرين">قصير جداً — سطر أو سطرين</option>
       <option value="قصير — 3 إلى 5 أسطر">قصير — 3 إلى 5 أسطر</option>
       <option value="متوسط — فقرة كاملة" selected>متوسط — فقرة كاملة</option>
       <option value="طويل — وصف مفصل">طويل — وصف مفصل</option>
     </select>
-    <label>اسم المنتج</label>
+    <label>📦 اسم المنتج</label>
     <input id="pr-name" placeholder="مثال: عسل جبلي">
-    <label>أبرز المزايا</label>
+    <label>⭐ أبرز المزايا</label>
     <textarea id="pr-feat" rows="2" placeholder="طبيعي 100%، من جبال الطائف، بدون سكر..."></textarea>
   </div>
 
   <div id="pane-ideas" class="pane hidden">
-    <label>مجال عملك</label>
+    <label>🎯 مجال عملك</label>
     <input id="id-field" placeholder="مثال: تسويق عقاري، طبخ، لياقة">
-    <label>جمهورك مين؟</label>
+    <label>👥 جمهورك مين؟</label>
     <input id="id-aud" placeholder="مثال: شباب بيشتري أول شقة، أمهات، طلاب">
   </div>
 
   <div class="out" id="out"></div>
-  <button class="copy-btn hidden" id="copyBtn">نسخ</button>
-  <button class="go" id="run">تنفيذ</button>
+  <button class="copy-btn hidden" id="copyBtn">📋 نسخ</button>
+  <button class="go" id="run">✨ تنفيذ</button>
   <div class="counter" id="counter"></div>
 
   <div class="subscribe-card hidden" id="subscribeCard">
     <div class="subscribe-content">
-      <h2 class="subscribe-title">وصلت لحدك المجاني</h2>
+      <h2 class="subscribe-title">✨ وصلت لحدك المجاني</h2>
       <p class="subscribe-text">اختر الباقة المناسبة لك وكمّل بدون توقف</p>
 
       <div class="plans">
@@ -902,7 +904,7 @@ function renderCounter() {
   el.classList.remove("low", "out-of-credits");
   if (left > 0) {
     el.style.display = "";
-    el.textContent = "متبقي " + left + " من " + TRIAL_DAYS + " أيام تجريبية";
+    el.textContent = "⚡ متبقي " + left + " من " + TRIAL_DAYS + " أيام تجريبية";
     card.classList.add("hidden");
   } else {
     el.style.display = "none";
@@ -980,8 +982,8 @@ copyBtn.addEventListener("click", async () => {
     document.body.appendChild(ta); ta.select();
     document.execCommand("copy"); document.body.removeChild(ta);
   }
-  copyBtn.textContent = "تم النسخ";
-  setTimeout(() => { copyBtn.textContent = "نسخ"; }, 1500);
+  copyBtn.textContent = "✅ تم النسخ";
+  setTimeout(() => { copyBtn.textContent = "📋 نسخ"; }, 1500);
 });
 
 document.querySelectorAll(".plan-btn").forEach(btn => {
@@ -1142,7 +1144,7 @@ function updateAuthUI(user) {
   const area = document.getElementById("logoutArea");
   if (!area) return;
   if (user) {
-    area.innerHTML = '<span style="color:#c8c8d4;font-size:.82rem;">' + user.email + '</span> <button class="logout-btn" id="logoutBtn">خروج</button>';
+    area.innerHTML = '<span style="color:#c8c8d4;font-size:.82rem;">' + user.email + '</span> <button class="logout-btn" id="logoutBtn">🚪 خروج</button>';
     document.getElementById("logoutBtn").addEventListener("click", async () => {
       await supabase.auth.signOut();
       location.reload();
