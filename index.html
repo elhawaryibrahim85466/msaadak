@@ -755,6 +755,124 @@ button.go{
     inset 0 1px 0 rgba(255,255,255,.15) !important;
 }
 
+
+/* ===== iOS Blur Glass ===== */
+.card,
+.tabs,
+.out,
+.counter,
+.plan,
+.subscribe-card,
+.gate-form,
+.gate-feature,
+.copy-btn,
+.admin-modal-content,
+input, textarea, select{
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+}
+
+/* تحسين الأداء */
+.card,
+.tabs,
+.out,
+.counter,
+.plan,
+.subscribe-card,
+.gate-form{
+  will-change: backdrop-filter;
+  transform: translateZ(0);
+}
+
+/* الكارد الرئيسي — زجاج ضبابي أعمق */
+.card{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.05) 50%, rgba(255,255,255,.02) 100%),
+    rgba(20,20,32,.35) !important;
+  border:1px solid rgba(255,255,255,.24) !important;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.25) !important;
+}
+
+/* التابات */
+.tabs{
+  background: rgba(255,255,255,.08) !important;
+  border:1px solid rgba(255,255,255,.22) !important;
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.3),
+    inset 0 1px 0 rgba(255,255,255,.22) !important;
+}
+
+/* الحقول — شفافة أكتر */
+input, textarea, select{
+  background: rgba(255,255,255,.06) !important;
+  border:1px solid rgba(255,255,255,.20) !important;
+}
+input:focus, textarea:focus, select:focus{
+  background: rgba(255,255,255,.10) !important;
+}
+
+/* النتيجة */
+.out{
+  background: rgba(255,255,255,.06) !important;
+  border:1px solid rgba(255,255,255,.20) !important;
+}
+
+/* العدّاد */
+.counter{
+  background: rgba(255,255,255,.06) !important;
+  border:1px solid rgba(255,255,255,.20) !important;
+}
+
+/* بطاقات الباقات */
+.plan{
+  background: rgba(255,255,255,.08) !important;
+  border:1px solid rgba(255,255,255,.20) !important;
+}
+
+/* كارت الاشتراك */
+.subscribe-card{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04)),
+    rgba(30,28,20,.4) !important;
+  border:1px solid rgba(232,200,96,.4) !important;
+}
+
+/* شاشة تسجيل الدخول */
+.gate-form{
+  background: rgba(255,255,255,.08) !important;
+  border:1px solid rgba(255,255,255,.24) !important;
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,255,255,.25) !important;
+}
+.gate-input{
+  background: rgba(255,255,255,.06) !important;
+  border:1px solid rgba(255,255,255,.20) !important;
+}
+.gate-feature{
+  background: rgba(255,255,255,.08) !important;
+  border:1px solid rgba(255,255,255,.18) !important;
+}
+
+/* زر النسخ */
+.copy-btn{
+  background: rgba(255,255,255,.08) !important;
+  border:1px solid rgba(232,200,96,.45) !important;
+}
+
+/* زر الأدمن */
+.admin-modal-content{
+  background: rgba(25,25,40,.75) !important;
+  border:1px solid rgba(232,200,96,.4) !important;
+}
+
+/* ===== إصلاح الأنيميشن (يوقف بعد شوية عشان الأداء) ===== */
+body::before{
+  animation: drift 20s ease-in-out 3 !important; /* 3 مرات وبس */
+}
+
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
