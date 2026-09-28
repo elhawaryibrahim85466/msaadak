@@ -1474,6 +1474,62 @@ input::placeholder, textarea::placeholder{
   transform: translateY(-1px);
 }
 
+
+/* ===== Premium Mode (في الآخر عشان يتطبق) ===== */
+body.premium{
+  --gold:#a855f7;
+  --gold-2:#c4b0f0;
+}
+body.premium::before{
+  background:
+    radial-gradient(closest-side at 20% 15%, rgba(168,85,247,.55) 0%, transparent 55%),
+    radial-gradient(closest-side at 85% 25%, rgba(109,40,217,.45) 0%, transparent 55%),
+    radial-gradient(closest-side at 65% 90%, rgba(200,56,180,.35) 0%, transparent 55%),
+    radial-gradient(closest-side at 10% 85%, rgba(232,200,96,.25) 0%, transparent 55%) !important;
+  filter: blur(60px) !important;
+}
+body.premium #logoBtn{
+  background:linear-gradient(180deg,#e0be45,#a855f7 60%,#6d28d9) !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  color:transparent !important;
+  filter:drop-shadow(0 4px 24px rgba(168,85,247,.55)) !important;
+}
+body.premium .card{
+  border-color:rgba(168,85,247,.40) !important;
+  box-shadow:
+    0 20px 60px rgba(168,85,247,.20),
+    inset 0 1px 0 rgba(255,255,255,.15) !important;
+}
+body.premium .tab.active{
+  background:linear-gradient(180deg,#e0be45,#a855f7 60%,#6d28d9) !important;
+  color:#fff !important;
+  box-shadow:
+    0 4px 14px rgba(168,85,247,.50),
+    inset 0 1px 0 rgba(255,255,255,.6) !important;
+}
+body.premium button.go,
+body.premium .gate-submit{
+  background:linear-gradient(180deg,#e0be45,#a855f7 60%,#6d28d9) !important;
+  color:#fff !important;
+  box-shadow:
+    0 8px 22px rgba(168,85,247,.45),
+    inset 0 1px 0 rgba(255,255,255,.5) !important;
+}
+body.premium .gold-glow-top{
+  background:linear-gradient(90deg, transparent, rgba(168,85,247,.9), rgba(255,255,255,.6), rgba(168,85,247,.9), transparent) !important;
+  box-shadow:0 0 20px rgba(168,85,247,.6), 0 0 40px rgba(168,85,247,.3) !important;
+}
+body.premium .gold-bar-top{
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(196,176,240,.6) 0%, rgba(168,85,247,.35) 25%, rgba(168,85,247,.1) 50%, transparent 75%) !important;
+}
+body.premium .premium-badge{
+  background:linear-gradient(135deg, #a855f7, #e8c860) !important;
+  color:#fff !important;
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
