@@ -69,10 +69,10 @@ header p{color:var(--muted);font-size:.88rem;font-weight:500}
   display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
   margin-bottom:20px;width:100%;max-width:600px;z-index:1;
   padding:6px;
-  background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04)), rgba(15,15,22,.55);
-  border:1px solid rgba(255,255,255,.16);
+  background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06)), rgba(25,25,40,.5);
+  border:1px solid rgba(255,255,255,.22);
   border-radius:18px;
-  box-shadow:0 4px 12px rgba(0,0,0,.3);
+  box-shadow:0 8px 24px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.12);
 }
 .tab{
   padding:9px 16px;border-radius:12px;cursor:pointer;
@@ -92,11 +92,11 @@ header p{color:var(--muted);font-size:.88rem;font-weight:500}
 .card{
   position:relative;
   width:100%;max-width:600px;
-  background:linear-gradient(180deg, rgba(255,255,255,.13) 0%, rgba(255,255,255,.06) 100%), linear-gradient(180deg, rgba(20,20,30,.78) 0%, rgba(12,12,20,.82) 100%);
-  border:1px solid var(--stroke);
+  background:linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,.08) 100%), linear-gradient(180deg, rgba(30,30,45,.55) 0%, rgba(15,15,25,.65) 100%);
+  border:1px solid rgba(255,255,255,.22);
   border-radius:26px;
   padding:24px;
-  box-shadow:0 12px 30px rgba(0,0,0,.4);
+  box-shadow:0 12px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.15);
   z-index:1;
   overflow:hidden;
 }
@@ -123,8 +123,8 @@ label{
 }
 input,textarea,select{
   width:100%;padding:13px 15px;margin-bottom:10px;
-  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.35));
-  border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.20);
   border-radius:14px;
   color:var(--text);font-size:.93rem;font-family:inherit;
   resize:vertical;
@@ -146,7 +146,7 @@ button.go{
   background:linear-gradient(180deg,#f7dc85,#e8c860 50%,#c9a227);
   color:#1a1408;font-size:1rem;font-weight:800;
   cursor:pointer;letter-spacing:.4px;
-  box-shadow:0 6px 16px rgba(232,200,96,.4);
+  box-shadow:0 6px 16px rgba(232,200,96,.45), inset 0 1px 0 rgba(255,255,255,.6);
   transition:transform .1s ease, box-shadow .15s ease;
 }
 button.go:hover:not(:disabled){
@@ -160,8 +160,8 @@ button.go:disabled{opacity:.55;cursor:not-allowed}
 /* ===== النتيجة ===== */
 .out{
   margin:10px 0;padding:14px;
-  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.35));
-  border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+  border:1px solid rgba(255,255,255,.20);
   border-radius:14px;
   min-height:50px;overflow:visible;
   white-space:pre-wrap;line-height:1.8;
@@ -174,9 +174,9 @@ button.go:disabled{opacity:.55;cursor:not-allowed}
 /* ===== العدّاد ===== */
 .counter{
   text-align:center;margin-top:10px;padding:9px;
-  background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.03)), rgba(15,15,22,.5);
-  border-radius:12px;color:#c8c8d4;font-size:.82rem;font-weight:500;
-  border:1px solid var(--stroke);
+  background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04)), rgba(25,25,40,.45);
+  border-radius:12px;color:#d8d8e0;font-size:.82rem;font-weight:500;
+  border:1px solid rgba(255,255,255,.20);
 }
 .counter.low{color:#f7c860;border-color:rgba(247,200,96,.4)}
 .counter.out-of-credits{color:#ff8080;font-weight:700;border-color:rgba(255,128,128,.4)}
@@ -260,8 +260,8 @@ body.premium .premium-badge{display:inline-block}
 .plan{
   position:relative;
   padding:18px 14px;
-  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.05));
+  border:1px solid rgba(255,255,255,.20);
   border-radius:18px;
   display:flex;flex-direction:column;
   text-align:center;
@@ -428,7 +428,12 @@ body.premium .premium-badge{display:inline-block}
 /* ===== غلاف المصادقة ===== */
 .auth-gate{
   position:fixed;inset:0;z-index:1000;
-  background:linear-gradient(180deg,#0a0a10 0%,#050507 100%);
+  background:
+    radial-gradient(closest-side at 20% 15%, rgba(232,185,58,.25) 0%, transparent 55%),
+    radial-gradient(closest-side at 85% 25%, rgba(91,75,214,.22) 0%, transparent 55%),
+    radial-gradient(closest-side at 65% 90%, rgba(200,56,122,.18) 0%, transparent 55%),
+    radial-gradient(closest-side at 10% 85%, rgba(30,166,184,.18) 0%, transparent 55%),
+    linear-gradient(180deg,#0a0a10 0%,#050507 100%);
   display:flex;align-items:center;justify-content:center;
   padding:24px 16px;overflow-y:auto;
 }
@@ -471,10 +476,10 @@ body.premium .premium-badge{display:inline-block}
   color:#c8c8d4;font-size:.78rem;font-weight:600;
 }
 .gate-form{
-  background:linear-gradient(180deg,rgba(255,255,255,.10),rgba(255,255,255,.04));
-  border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+  border:1px solid rgba(255,255,255,.22);
   border-radius:20px;padding:24px;
-  box-shadow:0 20px 50px rgba(0,0,0,.5);
+  box-shadow:0 20px 50px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.15);
 }
 .gate-input{
   width:100%;padding:14px 16px;margin-bottom:12px;
@@ -510,7 +515,7 @@ body.premium .premium-badge{display:inline-block}
 .admin-msg.success{color:#7ce0a0}
 
 .hidden{display:none}
-.copy-btn{width:100%;padding:12px;margin-bottom:12px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(232,200,96,.4);color:#f7dc85;font-size:.92rem;font-weight:700;cursor:pointer;letter-spacing:.3px;transition:all .2s ease}
+.copy-btn{width:100%;padding:12px;margin-bottom:12px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.04));border:1px solid rgba(232,200,96,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.15);color:#f7dc85;font-size:.92rem;font-weight:700;cursor:pointer;letter-spacing:.3px;transition:all .2s ease}
 .copy-btn:hover{background:rgba(232,200,96,.15);border-color:rgba(232,200,96,.7);transform:translateY(-1px)}
 .copy-btn:active{transform:translateY(0) scale(.99)}
 
@@ -519,8 +524,8 @@ body.premium .premium-badge{display:inline-block}
   position:relative;
   margin-top:16px;
   padding:26px 22px;
-  background:linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.06) 100%), linear-gradient(180deg, rgba(25,22,15,.8), rgba(15,13,8,.85));
-  border:1px solid rgba(232,200,96,.35);
+  background:linear-gradient(180deg, rgba(255,255,255,.16) 0%, rgba(255,255,255,.06) 100%), linear-gradient(180deg, rgba(40,35,20,.55), rgba(20,18,10,.65));
+  border:1px solid rgba(232,200,96,.40);
   border-radius:24px;
   overflow:hidden;
   text-align:center;
