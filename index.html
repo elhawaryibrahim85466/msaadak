@@ -586,6 +586,71 @@ body.premium .premium-badge{display:inline-block}
   -webkit-user-select:none;
   text-align:center;
 }
+
+/* ===== أيقونات SVG ===== */
+.tab{
+  display:inline-flex !important;
+  align-items:center;
+  gap:6px;
+}
+.tab::before{
+  content:"";
+  display:inline-block;
+  width:14px;height:14px;
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+  opacity:.85;
+  flex-shrink:0;
+}
+.tab[data-mode="translate"]::before{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z'/></svg>");
+}
+.tab[data-mode="rewrite"]::before{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 20h9'/><path d='M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4L16.5 3.5z'/></svg>");
+}
+.tab[data-mode="product"]::before{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z'/><polyline points='3.27 6.96 12 12.01 20.73 6.96'/><line x1='12' y1='22.08' x2='12' y2='12'/></svg>");
+}
+.tab[data-mode="ideas"]::before{
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M9 18h6'/><path d='M10 22h4'/><path d='M12 2a7 7 0 00-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0012 2z'/></svg>");
+}
+
+button.go{
+  display:inline-flex !important;
+  align-items:center;justify-content:center;
+  gap:8px;
+}
+button.go::before{
+  content:"";
+  display:inline-block;
+  width:16px;height:16px;
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1408' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z'/></svg>");
+}
+
+/* أيقونة النجمة جنب مساعدك */
+#logoBtn{
+  position:relative;
+}
+#logoBtn::before{
+  content:"";
+  position:absolute;
+  top:0;right:-22px;
+  width:20px;height:20px;
+  background-size:contain;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f7dc85' stroke='%23f7dc85' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'><path d='M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z'/></svg>");
+  filter:drop-shadow(0 0 6px rgba(232,200,96,.8));
+  animation:twinkle 2s ease-in-out infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:.7;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.15)}
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -614,24 +679,24 @@ body.premium .premium-badge{display:inline-block}
 </div>
 
 <header>
-  <div id="logoBtn">✨ مساعدك</div>
+  <div id="logoBtn">مساعدك</div>
   <p id="tagline">صياغة احترافية بنقرة واحدة</p>
   <div class="premium-badge">مشترك بريميوم · استخدامات غير محدودة</div>
   <div id="logoutArea" style="margin-top:10px;text-align:center;"></div>
 </header>
 
 <div class="tabs">
-  <div class="tab active" data-mode="translate">✨ ترجمة</div>
-  <div class="tab" data-mode="rewrite">✏️ صياغة</div>
-  <div class="tab" data-mode="product">📦 وصف منتج</div>
-  <div class="tab" data-mode="ideas">💡 أفكار محتوى</div>
+  <div class="tab active" data-mode="translate">ترجمة</div>
+  <div class="tab" data-mode="rewrite">صياغة</div>
+  <div class="tab" data-mode="product">وصف منتج</div>
+  <div class="tab" data-mode="ideas">أفكار محتوى</div>
 </div>
 
 <div class="card">
   <div id="pane-translate" class="pane">
-    <label>📄 النص</label>
+    <label>النص</label>
     <textarea id="tr-text" rows="3" placeholder="أدخل النص هنا..."></textarea>
-    <label>🌐 من لغة</label>
+    <label>من لغة</label>
     <select id="tr-from">
       <option value="auto" selected>كشف تلقائي</option>
       <option value="العربية">العربية</option>
@@ -661,7 +726,7 @@ body.premium .premium-badge{display:inline-block}
       <option value="الفيتنامية">الفيتنامية</option>
     </select>
 
-    <label>🌐 إلى لغة</label>
+    <label>إلى لغة</label>
     <select id="tr-to">
       <option value="الإنجليزية" selected>الإنجليزية</option>
       <option value="العربية">العربية</option>
@@ -692,9 +757,9 @@ body.premium .premium-badge{display:inline-block}
   </div>
 
   <div id="pane-rewrite" class="pane hidden">
-    <label>✏️ ما الذي تريد قوله؟</label>
+    <label>ما الذي تريد قوله؟</label>
     <textarea id="rw-text" rows="3" placeholder="مثال: أرغب بإبلاغ المدير بتأخري غداً..."></textarea>
-    <label>🎭 نبرة الخطاب</label>
+    <label>نبرة الخطاب</label>
     <select id="rw-tone">
       <option value="رسمي">رسمي</option>
       <option value="لبق ومهني">لبق ومهني</option>
@@ -705,34 +770,34 @@ body.premium .premium-badge{display:inline-block}
   </div>
 
   <div id="pane-product" class="pane hidden">
-    <label>📏 حجم الوصف</label>
+    <label>حجم الوصف</label>
     <select id="pr-size">
       <option value="قصير جداً — سطر أو سطرين">قصير جداً — سطر أو سطرين</option>
       <option value="قصير — 3 إلى 5 أسطر">قصير — 3 إلى 5 أسطر</option>
       <option value="متوسط — فقرة كاملة" selected>متوسط — فقرة كاملة</option>
       <option value="طويل — وصف مفصل">طويل — وصف مفصل</option>
     </select>
-    <label>📦 اسم المنتج</label>
+    <label>اسم المنتج</label>
     <input id="pr-name" placeholder="مثال: عسل جبلي">
-    <label>⭐ أبرز المزايا</label>
+    <label>أبرز المزايا</label>
     <textarea id="pr-feat" rows="2" placeholder="طبيعي 100%، من جبال الطائف، بدون سكر..."></textarea>
   </div>
 
   <div id="pane-ideas" class="pane hidden">
-    <label>🎯 مجال عملك</label>
+    <label>مجال عملك</label>
     <input id="id-field" placeholder="مثال: تسويق عقاري، طبخ، لياقة">
-    <label>👥 جمهورك مين؟</label>
+    <label>جمهورك مين؟</label>
     <input id="id-aud" placeholder="مثال: شباب بيشتري أول شقة، أمهات، طلاب">
   </div>
 
   <div class="out" id="out"></div>
-  <button class="copy-btn hidden" id="copyBtn">📋 نسخ</button>
-  <button class="go" id="run">✨ تنفيذ</button>
+  <button class="copy-btn hidden" id="copyBtn">نسخ</button>
+  <button class="go" id="run">تنفيذ</button>
   <div class="counter" id="counter"></div>
 
   <div class="subscribe-card hidden" id="subscribeCard">
     <div class="subscribe-content">
-      <h2 class="subscribe-title">✨ وصلت لحدك المجاني</h2>
+      <h2 class="subscribe-title">وصلت لحدك المجاني</h2>
       <p class="subscribe-text">اختر الباقة المناسبة لك وكمّل بدون توقف</p>
 
       <div class="plans">
@@ -904,7 +969,7 @@ function renderCounter() {
   el.classList.remove("low", "out-of-credits");
   if (left > 0) {
     el.style.display = "";
-    el.textContent = "⚡ متبقي " + left + " من " + TRIAL_DAYS + " أيام تجريبية";
+    el.textContent = "متبقي " + left + " من " + TRIAL_DAYS + " أيام تجريبية";
     card.classList.add("hidden");
   } else {
     el.style.display = "none";
@@ -982,8 +1047,8 @@ copyBtn.addEventListener("click", async () => {
     document.body.appendChild(ta); ta.select();
     document.execCommand("copy"); document.body.removeChild(ta);
   }
-  copyBtn.textContent = "✅ تم النسخ";
-  setTimeout(() => { copyBtn.textContent = "📋 نسخ"; }, 1500);
+  copyBtn.textContent = "تم النسخ";
+  setTimeout(() => { copyBtn.textContent = "نسخ"; }, 1500);
 });
 
 document.querySelectorAll(".plan-btn").forEach(btn => {
@@ -1144,7 +1209,7 @@ function updateAuthUI(user) {
   const area = document.getElementById("logoutArea");
   if (!area) return;
   if (user) {
-    area.innerHTML = '<span style="color:#c8c8d4;font-size:.82rem;">' + user.email + '</span> <button class="logout-btn" id="logoutBtn">🚪 خروج</button>';
+    area.innerHTML = '<span style="color:#c8c8d4;font-size:.82rem;">' + user.email + '</span> <button class="logout-btn" id="logoutBtn">خروج</button>';
     document.getElementById("logoutBtn").addEventListener("click", async () => {
       await supabase.auth.signOut();
       location.reload();
