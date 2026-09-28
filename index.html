@@ -873,7 +873,401 @@ body::before{
   animation: drift 20s ease-in-out 3 !important; /* 3 مرات وبس */
 }
 
+
+/* ============================================
+   iOS 17 Design System
+   ============================================ */
+:root{
+  /* iOS System Colors */
+  --ios-bg: #000000;
+  --ios-bg-2: #1c1c1e;
+  --ios-bg-3: #2c2c2e;
+  --ios-label: #ffffff;
+  --ios-label-2: rgba(235,235,245,.6);
+  --ios-label-3: rgba(235,235,245,.3);
+  --ios-separator: rgba(84,84,88,.65);
+  --ios-accent: #e8c860;
+  --ios-blue: #0a84ff;
+  
+  /* Glass */
+  --ios-glass-bg: rgba(28,28,30,.72);
+  --ios-glass-border: rgba(255,255,255,.10);
+  --ios-glass-highlight: rgba(255,255,255,.08);
+}
+
+/* الخط */
+*{
+  font-family: 'Inter', -apple-system, 'SF Pro Display', 'Segoe UI', Tahoma, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body{
+  background: #000 !important;
+  color: var(--ios-label) !important;
+  letter-spacing: -0.01em;
+}
+
+/* الخلفية - ألوان iOS ناعمة */
+body::before{
+  content:"";
+  position:fixed;inset:-25%;
+  background:
+    radial-gradient(closest-side at 20% 15%, rgba(232,185,58,.35) 0%, transparent 60%),
+    radial-gradient(closest-side at 85% 25%, rgba(91,75,214,.28) 0%, transparent 60%),
+    radial-gradient(closest-side at 65% 90%, rgba(200,56,122,.22) 0%, transparent 60%),
+    radial-gradient(closest-side at 10% 85%, rgba(30,166,184,.22) 0%, transparent 60%);
+  filter:blur(80px);
+  opacity:1;
+  animation: iosDrift 30s ease-in-out infinite alternate;
+  z-index:-2;
+}
+@keyframes iosDrift{
+  0%{transform:translate(0,0) scale(1)}
+  100%{transform:translate(-3%,-2%) scale(1.08)}
+}
+body::after{
+  content:"";
+  position:fixed;inset:0;
+  background:radial-gradient(ellipse at 50% 50%, transparent 0%, rgba(0,0,0,.7) 100%);
+  z-index:-1;
+}
+
+/* ===== Shart ===== */
+#logoBtn{
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  font-size: 2.6rem !important;
+  background:linear-gradient(180deg,#fff8e0,#e8c860 55%,#b8912f) !important;
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  -webkit-text-fill-color:transparent !important;
+  color:transparent !important;
+  filter:drop-shadow(0 4px 20px rgba(232,200,96,.45)) !important;
+}
+
+header p{
+  color: var(--ios-label-2) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.005em !important;
+}
+
+/* ===== الكارد — iOS Glass ===== */
+.card{
+  background: var(--ios-glass-bg) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border:0.5px solid var(--ios-glass-border) !important;
+  border-radius: 24px !important;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.5),
+    0 1px 0 rgba(255,255,255,.08) inset !important;
+  padding: 20px !important;
+}
+.card::before{
+  background: linear-gradient(180deg, rgba(255,255,255,.04), transparent 60%) !important;
+  border-radius: 24px 24px 0 0 !important;
+}
+.card::after{
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent) !important;
+  height: 0.5px !important;
+}
+
+/* ===== التابات — iOS Segmented Control ===== */
+.tabs{
+  background: rgba(118,118,128,.24) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid var(--ios-glass-border) !important;
+  border-radius: 14px !important;
+  padding: 3px !important;
+  box-shadow: none !important;
+  gap: 2px !important;
+}
+.tab{
+  padding: 8px 14px !important;
+  border-radius: 11px !important;
+  font-weight: 600 !important;
+  font-size: 0.84rem !important;
+  color: var(--ios-label) !important;
+  background: transparent !important;
+  border: none !important;
+  letter-spacing: -0.005em !important;
+  transition: all .25s cubic-bezier(.4,0,.2,1) !important;
+}
+.tab.active{
+  background: linear-gradient(180deg,#f7dc85,#e8c860 55%,#d0a840) !important;
+  color: #1a1408 !important;
+  font-weight: 700 !important;
+  box-shadow:
+    0 3px 10px rgba(232,200,96,.35),
+    0 1px 0 rgba(255,255,255,.6) inset !important;
+}
+
+/* ===== الحقول — iOS Input ===== */
+label{
+  color: var(--ios-label-2) !important;
+  font-weight: 500 !important;
+  font-size: 0.78rem !important;
+  letter-spacing: -0.005em !important;
+  text-transform: none !important;
+}
+input, textarea, select{
+  background: rgba(118,118,128,.20) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.10) !important;
+  border-radius: 12px !important;
+  padding: 12px 14px !important;
+  font-weight: 400 !important;
+  font-size: 0.94rem !important;
+  color: var(--ios-label) !important;
+  box-shadow: none !important;
+  letter-spacing: -0.005em !important;
+}
+input::placeholder, textarea::placeholder{
+  color: var(--ios-label-3) !important;
+}
+input:focus, textarea:focus, select:focus{
+  background: rgba(118,118,128,.28) !important;
+  border-color: rgba(232,200,96,.5) !important;
+  box-shadow: 0 0 0 3px rgba(232,200,96,.15) !important;
+}
+
+/* ===== زر التنفيذ — iOS Button ===== */
+button.go{
+  background: linear-gradient(180deg,#f7dc85,#e8c860 55%,#d0a840) !important;
+  color: #1a1408 !important;
+  font-weight: 700 !important;
+  font-size: 1rem !important;
+  border-radius: 14px !important;
+  padding: 15px !important;
+  letter-spacing: -0.01em !important;
+  border: none !important;
+  box-shadow:
+    0 8px 22px rgba(232,200,96,.35),
+    0 1px 0 rgba(255,255,255,.5) inset !important;
+  transition: transform .15s cubic-bezier(.4,0,.2,1) !important;
+}
+button.go:active:not(:disabled){
+  transform: scale(0.97) !important;
+}
+
+/* ===== النتيجة — iOS Card ===== */
+.out{
+  background: rgba(118,118,128,.18) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.10) !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+  letter-spacing: -0.005em !important;
+}
+
+/* ===== العدّاد — iOS Info Row ===== */
+.counter{
+  background: rgba(118,118,128,.20) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.10) !important;
+  border-radius: 12px !important;
+  color: var(--ios-label-2) !important;
+  font-weight: 500 !important;
+  font-size: 0.8rem !important;
+  letter-spacing: -0.005em !important;
+}
+
+/* ===== زر النسخ ===== */
+.copy-btn{
+  background: rgba(118,118,128,.20) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(232,200,96,.35) !important;
+  border-radius: 12px !important;
+  color: var(--ios-accent) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.005em !important;
+}
+
+/* ===== شاشة الباقات ===== */
+.subscribe-card{
+  background: rgba(28,28,30,.75) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(232,200,96,.30) !important;
+  border-radius: 22px !important;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.5),
+    0 1px 0 rgba(255,255,255,.06) inset !important;
+}
+.subscribe-title{
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--ios-accent) !important;
+}
+.subscribe-text{
+  font-weight: 400 !important;
+  color: var(--ios-label-2) !important;
+  letter-spacing: -0.005em !important;
+}
+
+/* ===== بطاقات الباقات ===== */
+.plan{
+  background: rgba(118,118,128,.16) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.10) !important;
+  border-radius: 18px !important;
+  box-shadow: none !important;
+  padding: 18px 14px !important;
+}
+.plan-duration{
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  font-size: 1.05rem !important;
+}
+.plan-amount{
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  font-size: 1.6rem !important;
+}
+.plan-permonth{
+  font-weight: 500 !important;
+  color: var(--ios-label-2) !important;
+  letter-spacing: -0.005em !important;
+}
+.plan-btn{
+  background: rgba(118,118,128,.28) !important;
+  border: 0.5px solid rgba(255,255,255,.10) !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+  padding: 11px !important;
+  letter-spacing: -0.005em !important;
+}
+.plan-features li{
+  font-weight: 400 !important;
+  letter-spacing: -0.005em !important;
+  color: var(--ios-label-2) !important;
+}
+
+/* ===== شاشة تسجيل الدخول ===== */
+.auth-gate{
+  background: transparent !important;
+}
+.gate-logo{
+  font-weight: 800 !important;
+  letter-spacing: -0.04em !important;
+  font-size: 3rem !important;
+}
+.gate-sub{
+  color: var(--ios-label-2) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.005em !important;
+}
+.gate-form{
+  background: var(--ios-glass-bg) !important;
+  backdrop-filter: blur(30px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+  border: 0.5px solid var(--ios-glass-border) !important;
+  border-radius: 22px !important;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.6),
+    0 1px 0 rgba(255,255,255,.08) inset !important;
+}
+.gate-input{
+  background: rgba(118,118,128,.24) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.10) !important;
+  border-radius: 12px !important;
+  padding: 14px 16px !important;
+  font-weight: 400 !important;
+  font-size: 0.95rem !important;
+}
+.gate-input::placeholder{
+  color: var(--ios-label-3) !important;
+}
+.gate-submit{
+  background: linear-gradient(180deg,#f7dc85,#e8c860 55%,#d0a840) !important;
+  color: #1a1408 !important;
+  font-weight: 700 !important;
+  border-radius: 14px !important;
+  padding: 14px !important;
+  letter-spacing: -0.01em !important;
+  box-shadow:
+    0 8px 22px rgba(232,200,96,.35),
+    0 1px 0 rgba(255,255,255,.5) inset !important;
+}
+.gate-feature{
+  background: rgba(118,118,128,.24) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.10) !important;
+  border-radius: 12px !important;
+  color: var(--ios-label) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.005em !important;
+}
+.gate-switch{
+  color: var(--ios-label-2) !important;
+  font-weight: 400 !important;
+}
+.gate-switch a{
+  color: var(--ios-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* ===== زر الخروج ===== */
+.logout-btn{
+  background: rgba(118,118,128,.24) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.10) !important;
+  border-radius: 10px !important;
+  color: var(--ios-label) !important;
+  font-weight: 500 !important;
+  padding: 6px 14px !important;
+  letter-spacing: -0.005em !important;
+}
+
+/* ===== نافذة الأدمن ===== */
+.admin-modal{
+  background: rgba(0,0,0,.5) !important;
+  backdrop-filter: blur(30px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+}
+.admin-modal-content{
+  background: var(--ios-glass-bg) !important;
+  backdrop-filter: blur(30px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+  border: 0.5px solid var(--ios-glass-border) !important;
+  border-radius: 22px !important;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.6),
+    0 1px 0 rgba(255,255,255,.08) inset !important;
+}
+
+/* ===== حركات iOS ===== */
+*{
+  transition-timing-function: cubic-bezier(.4,0,.2,1) !important;
+}
+
+/* نلغي أي حركات قديمة */
+@keyframes drift{
+  0%,100%{transform:translate(0,0) scale(1)}
+}
+
+@media (max-width:520px){
+  .card{ padding: 18px !important; }
+  #logoBtn{ font-size: 2.2rem !important; }
+  .gate-logo{ font-size: 2.6rem !important; }
+  .tab{ padding: 7px 11px !important; font-size: 0.78rem !important; }
+}
+
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
