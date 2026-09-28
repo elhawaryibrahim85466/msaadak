@@ -1375,6 +1375,50 @@ input, textarea, select{
   -webkit-backdrop-filter: blur(20px) !important;
 }
 
+
+/* ===== الشريط الذهبي والخلفية ===== */
+.gold-bar-top{
+  position:fixed;
+  top:-2px;left:-10%;right:-10%;
+  height:80px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(247,220,133,.6) 0%, rgba(232,200,96,.35) 25%, rgba(232,200,96,.1) 50%, transparent 75%);
+  filter:blur(20px);
+  pointer-events:none;
+  z-index:0;
+}
+
+.gold-glow-top{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg, transparent, rgba(247,220,133,.9), rgba(255,255,255,.6), rgba(247,220,133,.9), transparent);
+  box-shadow:0 0 20px rgba(232,200,96,.6), 0 0 40px rgba(232,200,96,.3);
+  pointer-events:none;
+  z-index:2;
+}
+
+.gold-glow-bottom{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg, transparent, rgba(247,220,133,.7), rgba(255,255,255,.4), rgba(247,220,133,.7), transparent);
+  box-shadow:0 0 -20px rgba(232,200,96,.5);
+  pointer-events:none;
+  z-index:2;
+}
+
+/* نضيف لمعة ذهبية للخلفية */
+body::before{
+  background:
+    radial-gradient(closest-side at 20% 15%, rgba(232,185,58,.45) 0%, transparent 55%),
+    radial-gradient(closest-side at 85% 25%, rgba(91,75,214,.30) 0%, transparent 55%),
+    radial-gradient(closest-side at 65% 90%, rgba(200,56,122,.22) 0%, transparent 55%),
+    radial-gradient(closest-side at 10% 85%, rgba(30,166,184,.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 50% 0%, rgba(232,200,96,.20) 0%, transparent 60%) !important;
+  filter: blur(60px) !important;
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -2028,6 +2072,11 @@ applyPremium();
 renderCounter();
 });
 </script>
+
+
+<div class="gold-bar-top" id="goldBar"></div>
+<div class="gold-glow-top"></div>
+<div class="gold-glow-bottom"></div>
 
 </body>
 </html>
