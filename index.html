@@ -1590,6 +1590,12 @@ button.go{font-size:1.1rem !important;padding:18px !important}
   color:#f7dc85;
 }
 
+
+/* إجبار homePage يظهر */
+#homePage:not(.hidden){display:block !important}
+#appContent:not(.hidden){display:block !important}
+#appContent.hidden{display:none !important}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -2176,12 +2182,9 @@ gateSubmit.addEventListener("click", async () => {
 
 function openApp(user) {
   authGate.classList.add("hidden");
-  const home = document.getElementById("homePage");
-  const app = document.getElementById("appContent");
-  const card = document.getElementById("serviceCard");
-  if (home) home.classList.remove("hidden");
-  if (app) app.classList.add("hidden");
-  if (card) card.classList.add("hidden");
+  document.getElementById("homePage").classList.remove("hidden");
+  document.getElementById("appContent").classList.add("hidden");
+  document.getElementById("serviceCard").classList.add("hidden");
   updateAuthUI(user);
   startTrialIfNeeded();
 }
@@ -2207,6 +2210,12 @@ function updateAuthUI(user) {
   const { data: { session } } = await supabase.auth.getSession();
   if (session?.user) {
     openApp(session.user);
+  } else {
+    // لو مفيش session، نظهر غلاف الدخول
+    document.getElementById("authGate").classList.remove("hidden");
+    document.getElementById("homePage").classList.add("hidden");
+    document.getElementById("appContent").classList.add("hidden");
+    document.getElementById("serviceCard").classList.add("hidden");
   }
 })();
 
@@ -2284,21 +2293,17 @@ adminPass.addEventListener("keydown", (e) => {
 // ===== التنقل بين الصفحات =====
 function showHome() {
   document.getElementById("homePage").classList.remove("hidden");
-  document.getElementById("serviceCard").classList.add("hidden");
   document.getElementById("appContent").classList.add("hidden");
-  document.getElementById("counter").style.display = "";
+  document.getElementById("serviceCard").classList.add("hidden");
 }
 
 function openService(mode) {
   document.getElementById("homePage").classList.add("hidden");
   document.getElementById("appContent").classList.remove("hidden");
   document.getElementById("serviceCard").classList.remove("hidden");
-  document.getElementById("counter").style.display = "";
-  
-  // نحدّث الوضع
+
   currentMode = mode;
-  
-  // نحدّث العنوان
+
   const titles = {
     translate: "ترجمة",
     rewrite: "صياغة",
@@ -2306,12 +2311,10 @@ function openService(mode) {
     ideas: "أفكار محتوى"
   };
   document.getElementById("serviceTitle").textContent = titles[mode] || "";
-  
-  // نبدّل الـ pane
+
   document.querySelectorAll(".pane").forEach(p => p.classList.add("hidden"));
   document.getElementById("pane-" + mode).classList.remove("hidden");
-  
-  // نصفّر النتيجة
+
   document.getElementById("out").classList.remove("show");
   document.getElementById("out").textContent = "";
   document.getElementById("copyBtn").classList.add("hidden");
@@ -2329,7 +2332,9 @@ document.getElementById("backBtn").addEventListener("click", showHome);
 
 applyPremium();
 renderCounter();
+
 });
+
 </script>
 
 
