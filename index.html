@@ -968,6 +968,212 @@ body.premium .tab.active{
   .service-icon{font-size:2rem}
   .service-name{font-size:1rem}
 }
+
+/* ============================================
+   Glass Mode كامل
+   ============================================ */
+
+/* الخلفية — ألوان واضحة وساطعة */
+body::before{
+  background:
+    radial-gradient(closest-side at 20% 15%, rgba(232,185,58,.55) 0%, transparent 55%),
+    radial-gradient(closest-side at 85% 25%, rgba(91,75,214,.45) 0%, transparent 55%),
+    radial-gradient(closest-side at 65% 90%, rgba(200,56,122,.40) 0%, transparent 55%),
+    radial-gradient(closest-side at 10% 85%, rgba(30,166,184,.40) 0%, transparent 55%) !important;
+  filter: blur(70px) !important;
+  opacity: 1 !important;
+}
+body::after{
+  background: radial-gradient(ellipse at 50% 50%, transparent 0%, rgba(0,0,0,.55) 100%) !important;
+}
+
+/* الكارد الرئيسي — زجاج شفاف */
+.card{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.14) 0%, rgba(255,255,255,.05) 100%) !important;
+  backdrop-filter: blur(30px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.20) !important;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.4),
+    inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+.card::before{
+  background: linear-gradient(180deg, rgba(255,255,255,.08), transparent 50%) !important;
+}
+.card::after{
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent) !important;
+  height: 0.5px !important;
+}
+
+/* التابات — زجاج iOS */
+.tabs{
+  background: rgba(255,255,255,.10) !important;
+  backdrop-filter: blur(30px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.20) !important;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,.3),
+    inset 0 1px 0 rgba(255,255,255,.20) !important;
+}
+.tab{
+  background: transparent !important;
+  border: 0.5px solid transparent !important;
+  color: rgba(255,255,255,.75) !important;
+}
+.tab:hover{
+  background: rgba(255,255,255,.08) !important;
+  color: #fff !important;
+}
+.tab.active{
+  background: linear-gradient(180deg, rgba(247,220,133,.95), rgba(232,200,96,.85)) !important;
+  color: #1a1408 !important;
+  box-shadow:
+    0 4px 16px rgba(232,200,96,.4),
+    inset 0 1px 0 rgba(255,255,255,.6) !important;
+}
+
+/* الحقول — زجاج شفاف */
+input, textarea, select{
+  background: rgba(255,255,255,.08) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.18) !important;
+  border-top-color: rgba(255,255,255,.30) !important;
+  border-bottom-color: rgba(0,0,0,.20) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.15),
+    inset 0 -1px 0 rgba(0,0,0,.10) !important;
+}
+input:focus, textarea:focus, select:focus{
+  background: rgba(255,255,255,.14) !important;
+  border-color: rgba(232,200,96,.6) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.20),
+    0 0 0 4px rgba(232,200,96,.18) !important;
+}
+
+/* زر التنفيذ — شبه شفاف بلمعة */
+button.go{
+  background: linear-gradient(180deg, rgba(247,220,133,.95), rgba(232,200,96,.90) 50%, rgba(201,162,39,.95)) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.4) !important;
+  box-shadow:
+    0 8px 24px rgba(232,200,96,.45),
+    inset 0 1px 0 rgba(255,255,255,.7),
+    inset 0 -1px 0 rgba(0,0,0,.10) !important;
+}
+
+/* النتيجة — زجاج */
+.out{
+  background: rgba(255,255,255,.08) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.18) !important;
+}
+
+/* العدّاد — زجاج */
+.counter{
+  background: rgba(255,255,255,.08) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.15) !important;
+  color: rgba(255,255,255,.7) !important;
+}
+
+/* كروت الخدمات — زجاج */
+.service-card{
+  background: rgba(255,255,255,.08) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.18) !important;
+  box-shadow:
+    0 12px 32px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.15) !important;
+}
+.service-card:hover{
+  background: rgba(255,255,255,.14) !important;
+  border-color: rgba(232,200,96,.5) !important;
+  box-shadow:
+    0 16px 40px rgba(232,200,96,.30),
+    inset 0 1px 0 rgba(255,255,255,.20) !important;
+}
+
+/* زر الرجوع — زجاج */
+.back-btn{
+  background: rgba(255,255,255,.10) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.18) !important;
+}
+
+/* زر النسخ — زجاج */
+.copy-btn{
+  background: rgba(255,255,255,.10) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(232,200,96,.35) !important;
+  color: #f7dc85 !important;
+}
+
+/* شاشة المصادقة — زجاج */
+.gate-form{
+  background: rgba(255,255,255,.10) !important;
+  backdrop-filter: blur(40px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.22) !important;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.5),
+    inset 0 1px 0 rgba(255,255,255,.20) !important;
+}
+.gate-input{
+  background: rgba(255,255,255,.08) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.18) !important;
+}
+.gate-feature{
+  background: rgba(255,255,255,.10) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.18) !important;
+}
+
+/* زر خروج — زجاج */
+.logout-btn{
+  background: rgba(255,255,255,.10) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.18) !important;
+}
+
+/* نافذة الأدمن — زجاج */
+.admin-modal{
+  background: rgba(0,0,0,.35) !important;
+  backdrop-filter: blur(40px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+}
+.admin-modal-content{
+  background: rgba(255,255,255,.10) !important;
+  backdrop-filter: blur(40px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(180%) !important;
+  border: 0.5px solid rgba(232,200,96,.35) !important;
+}
+
+/* الباقات — زجاج */
+.plan{
+  background: rgba(255,255,255,.10) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  border: 0.5px solid rgba(255,255,255,.18) !important;
+}
+.subscribe-card{
+  background: rgba(255,255,255,.08) !important;
+  backdrop-filter: blur(30px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+  border: 0.5px solid rgba(232,200,96,.30) !important;
+}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
