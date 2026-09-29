@@ -2176,8 +2176,12 @@ gateSubmit.addEventListener("click", async () => {
 
 function openApp(user) {
   authGate.classList.add("hidden");
+  const home = document.getElementById("homePage");
   const app = document.getElementById("appContent");
-  if (app) app.classList.remove("hidden");
+  const card = document.getElementById("serviceCard");
+  if (home) home.classList.remove("hidden");
+  if (app) app.classList.add("hidden");
+  if (card) card.classList.add("hidden");
   updateAuthUI(user);
   startTrialIfNeeded();
 }
@@ -2282,15 +2286,14 @@ function showHome() {
   document.getElementById("homePage").classList.remove("hidden");
   document.getElementById("serviceCard").classList.add("hidden");
   document.getElementById("appContent").classList.add("hidden");
+  document.getElementById("counter").style.display = "";
 }
 
 function openService(mode) {
-  // نخفي الرئيسية
   document.getElementById("homePage").classList.add("hidden");
-  // نظهر الكارد
-  const card = document.getElementById("serviceCard");
-  card.classList.remove("hidden");
   document.getElementById("appContent").classList.remove("hidden");
+  document.getElementById("serviceCard").classList.remove("hidden");
+  document.getElementById("counter").style.display = "";
   
   // نحدّث الوضع
   currentMode = mode;
