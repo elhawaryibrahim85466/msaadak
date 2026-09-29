@@ -1840,40 +1840,38 @@ button.go{font-size:1.1rem !important;padding:18px !important}
       
     </div>
   </div>
-</div>
 
-
-
-
-
-<div class="home-page" id="homePage">
-  <div class="home-header">
-    <div id="logoBtnHome">مساعدك</div>
-    <p>اختار الخدمة</p>
-  </div>
-  <div class="services-grid" id="servicesGrid">
-    <div class="service-card" data-mode="translate">
-      <div class="service-icon">🌐</div>
-      <div class="service-name">ترجمة</div>
-      <div class="service-desc">26 لغة</div>
+  <div class="home-page" id="homePage">
+    <div class="home-header">
+      <div id="logoBtnHome">مساعدك</div>
+      <p>اختار الخدمة</p>
     </div>
-    <div class="service-card" data-mode="rewrite">
-      <div class="service-icon">✏️</div>
-      <div class="service-name">صياغة</div>
-      <div class="service-desc">بنبرة مناسبة</div>
-    </div>
-    <div class="service-card" data-mode="product">
-      <div class="service-icon">📦</div>
-      <div class="service-name">وصف منتج</div>
-      <div class="service-desc">يبيع أكتر</div>
-    </div>
-    <div class="service-card" data-mode="ideas">
-      <div class="service-icon">💡</div>
-      <div class="service-name">أفكار محتوى</div>
-      <div class="service-desc">5 أفكار</div>
+    <div class="services-grid" id="servicesGrid">
+      <div class="service-card" data-mode="translate">
+        <div class="service-icon">🌐</div>
+        <div class="service-name">ترجمة</div>
+        <div class="service-desc">26 لغة</div>
+      </div>
+      <div class="service-card" data-mode="rewrite">
+        <div class="service-icon">✏️</div>
+        <div class="service-name">صياغة</div>
+        <div class="service-desc">بنبرة مناسبة</div>
+      </div>
+      <div class="service-card" data-mode="product">
+        <div class="service-icon">📦</div>
+        <div class="service-name">وصف منتج</div>
+        <div class="service-desc">يبيع أكتر</div>
+      </div>
+      <div class="service-card" data-mode="ideas">
+        <div class="service-icon">💡</div>
+        <div class="service-name">أفكار محتوى</div>
+        <div class="service-desc">5 أفكار</div>
+      </div>
     </div>
   </div>
 </div>
+
+
 
 <div class="admin-modal hidden" id="adminModal">
   <div class="admin-modal-content">
@@ -2182,8 +2180,8 @@ gateSubmit.addEventListener("click", async () => {
 
 function openApp(user) {
   authGate.classList.add("hidden");
+  document.getElementById("appContent").classList.remove("hidden");
   document.getElementById("homePage").classList.remove("hidden");
-  document.getElementById("appContent").classList.add("hidden");
   document.getElementById("serviceCard").classList.add("hidden");
   updateAuthUI(user);
   startTrialIfNeeded();
@@ -2191,8 +2189,8 @@ function openApp(user) {
 
 function showAuthGate() {
   authGate.classList.remove("hidden");
-  document.getElementById("homePage").classList.add("hidden");
   document.getElementById("appContent").classList.add("hidden");
+  document.getElementById("homePage").classList.add("hidden");
   document.getElementById("serviceCard").classList.add("hidden");
 }
 
@@ -2295,14 +2293,14 @@ adminPass.addEventListener("keydown", (e) => {
 
 // ===== التنقل بين الصفحات =====
 function showHome() {
+  document.getElementById("appContent").classList.remove("hidden");
   document.getElementById("homePage").classList.remove("hidden");
-  document.getElementById("appContent").classList.add("hidden");
   document.getElementById("serviceCard").classList.add("hidden");
 }
 
 function openService(mode) {
-  document.getElementById("homePage").classList.add("hidden");
   document.getElementById("appContent").classList.remove("hidden");
+  document.getElementById("homePage").classList.add("hidden");
   document.getElementById("serviceCard").classList.remove("hidden");
 
   currentMode = mode;
