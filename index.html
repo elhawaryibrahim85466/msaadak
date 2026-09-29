@@ -1600,97 +1600,94 @@ button.go{font-size:.95rem !important;padding:12px !important;border-radius:12px
 
 
 
-/* ===== ملء الشاشة ===== */
+
+/* ===== ملء الشاشة (نسخة مصححة) ===== */
 html, body {
-  min-height: 100vh !important;
-  height: 100% !important;
+  min-height: 100vh;
 }
 
 body {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #appContent {
-  display: flex !important;
-  flex-direction: column !important;
-  width: 100% !important;
-  max-width: 480px !important;
-  flex: 1 !important;
-  min-height: 0 !important;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  flex: 1;
+  min-height: 0;
 }
 
 #appContent.hidden {
-  display: none !important;
+  display: none;
 }
 
 #serviceCard {
-  flex: 1 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  margin-bottom: 0 !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 #serviceCard.hidden {
+  display: none;
+}
+
+/* الـ pane الظاهر بس يتمدد */
+#serviceCard .pane:not(.hidden) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* الـ pane المخفي يفضل مخفي */
+#serviceCard .pane.hidden {
   display: none !important;
 }
 
-/* الحقول تتمدد */
-#serviceCard .pane {
-  display: flex !important;
-  flex-direction: column !important;
-  flex: 1 !important;
-}
-
 /* textarea تتمدد */
-#serviceCard textarea {
-  flex: 1 !important;
-  min-height: 80px !important;
+#serviceCard .pane:not(.hidden) textarea {
+  flex: 1;
+  min-height: 80px;
 }
 
-/* النتيجة تتمدد */
-#serviceCard .out {
-  flex: 0 0 auto !important;
-}
-
-/* زر التنفيذ والعدّاد ثابتين تحت */
-#serviceCard button.go,
-#serviceCard .counter {
-  flex: 0 0 auto !important;
+/* زر التنفيذ والعدّاد والنتيجة ثابتين */
+#serviceCard > .out,
+#serviceCard > button.go,
+#serviceCard > button.copy-btn,
+#serviceCard > .counter {
+  flex: 0 0 auto;
 }
 
 /* الصفحة الرئيسية تتمدد */
 #homePage {
-  display: flex !important;
-  flex-direction: column !important;
-  width: 100% !important;
-  max-width: 480px !important;
-  flex: 1 !important;
-  min-height: 0 !important;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  flex: 1;
+  min-height: 0;
 }
 
 #homePage.hidden {
-  display: none !important;
+  display: none;
 }
 
 #servicesGrid {
-  flex: 1 !important;
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  grid-template-rows: 1fr 1fr !important;
-  gap: 14px !important;
-  align-content: stretch !important;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-content: stretch;
 }
 
-/* الكروت تتمدد */
 .service-card {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  align-items: center !important;
-  min-height: 100px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
