@@ -1478,7 +1478,6 @@ input::placeholder, textarea::placeholder{
 
 
 /* ===== إصلاح إضافي ===== */
-#appContent.hidden{display:none !important}
 
 
 /* ===== تكبير الأحجام ===== */
@@ -1594,9 +1593,6 @@ button.go{font-size:.95rem !important;padding:12px !important;border-radius:12px
 
 
 /* إجبار homePage يظهر */
-#homePage:not(.hidden){display:block !important}
-#appContent:not(.hidden){display:block !important}
-#appContent.hidden{display:none !important}
 
 
 
@@ -1956,6 +1952,29 @@ body {
 </div>
 
 
+
+
+
+
+
+
+
+<div class="gold-bar-top" id="goldBar"></div>
+<div class="gold-glow-top"></div>
+<div class="gold-glow-bottom"></div>
+
+
+
+
+<div class="home-page" id="homePage">
+  <div class="services-grid" id="servicesGrid">
+    <div class="service-card" data-mode="translate"><div class="service-icon">🌐</div><div class="service-name">ترجمة</div><div class="service-desc">26 لغة</div></div>
+    <div class="service-card" data-mode="rewrite"><div class="service-icon">✏️</div><div class="service-name">صياغة</div><div class="service-desc">بنبرة مناسبة</div></div>
+    <div class="service-card" data-mode="product"><div class="service-icon">📦</div><div class="service-name">وصف منتج</div><div class="service-desc">يبيع أكتر</div></div>
+    <div class="service-card" data-mode="ideas"><div class="service-icon">💡</div><div class="service-name">أفكار محتوى</div><div class="service-desc">5 أفكار</div></div>
+  </div>
+
+</div>
 
 <script>
 const TRIAL_DAYS = 7;
@@ -2410,20 +2429,6 @@ renderCounter();
 });
 
 </script>
-
-
-</div>
-<div class="gold-bar-top" id="goldBar"></div>
-<div class="gold-glow-top"></div>
-<div class="gold-glow-bottom"></div>
-
-<div class="home-page" id="homePage">
-  <div class="services-grid" id="servicesGrid">
-    <div class="service-card" data-mode="translate"><div class="service-icon">🌐</div><div class="service-name">ترجمة</div><div class="service-desc">26 لغة</div></div>
-    <div class="service-card" data-mode="rewrite"><div class="service-icon">✏️</div><div class="service-name">صياغة</div><div class="service-desc">بنبرة مناسبة</div></div>
-    <div class="service-card" data-mode="product"><div class="service-icon">📦</div><div class="service-name">وصف منتج</div><div class="service-desc">يبيع أكتر</div></div>
-    <div class="service-card" data-mode="ideas"><div class="service-icon">💡</div><div class="service-name">أفكار محتوى</div><div class="service-desc">5 أفكار</div></div>
-  </div>
 </div>
 
 </body>
