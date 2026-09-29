@@ -23,7 +23,7 @@ body{
   color:var(--text);
   min-height:100vh;
 display:flex;flex-direction:column;align-items:center;
-  padding:26px 16px 40px;
+  padding:14px 12px 20px;
   background:var(--bg);
   position:relative;
   overflow-x:hidden;
@@ -53,7 +53,7 @@ body::after{
 }
 
 /* ===== الهيدر ===== */
-header{text-align:center;margin-bottom:24px;z-index:1}
+header{text-align:center;margin-bottom:14px;z-index:1}
 h1{
   font-size:2.3rem;font-weight:800;letter-spacing:1px;
   background:linear-gradient(180deg,#fff8e0,#e8c860 55%,#b8912f);
@@ -67,7 +67,7 @@ header p{color:var(--muted);font-size:.88rem;font-weight:500}
 /* ===== التابات ===== */
 .tabs{
   display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
-  margin-bottom:20px;width:100%;max-width:600px;z-index:1;
+  margin-bottom:14px;width:100%;max-width:480px;z-index:1;
   padding:6px;
   background:linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06)), rgba(25,25,40,.5);
   border:1px solid rgba(255,255,255,.22);
@@ -92,11 +92,11 @@ header p{color:var(--muted);font-size:.88rem;font-weight:500}
 /* ===== الكارت الرئيسي ===== */
 .card{
   position:relative;
-  width:100%;max-width:600px;
+  width:100%;max-width:480px;
   background:linear-gradient(180deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,.08) 100%), linear-gradient(180deg, rgba(30,30,45,.55) 0%, rgba(15,15,25,.65) 100%);
   border:1px solid rgba(255,255,255,.22);
-  border-radius:26px;
-  padding:24px;
+  border-radius:22px;
+  padding:18px;
   box-shadow:0 12px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.15);
   z-index:1;
   overflow:hidden;
@@ -161,7 +161,7 @@ button.go:disabled{opacity:.55;cursor:not-allowed}
 
 /* ===== النتيجة ===== */
 .out{
-  margin:10px 0;padding:14px;
+  margin:6px 0;padding:11px;
   background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
   border:1px solid rgba(255,255,255,.20);
   border-radius:14px;
@@ -406,7 +406,7 @@ body.premium .premium-badge{display:inline-block}
 .auth-area{margin-top:10px;text-align:center;z-index:1}
 .auth-btn{padding:8px 20px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.06));border:1px solid rgba(232,200,96,.4);color:#f7dc85;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s}
 .auth-btn:hover{background:rgba(232,200,96,.2);border-color:rgba(232,200,96,.7)}
-.user-info{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:6px}
+.user-info{display:flex;gap:6px;align-items:center;justify-content:center;margin-top:4px}
 .user-email{color:#c8c8d4;font-size:.82rem;font-weight:600}
 .logout-btn{padding:5px 12px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#d0d0dc;font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit}
 .logout-btn:hover{background:rgba(224,94,94,.2);border-color:rgba(224,94,94,.5);color:#ff8080}
@@ -1482,14 +1482,14 @@ input::placeholder, textarea::placeholder{
 
 
 /* ===== تكبير الأحجام ===== */
-#logoBtn{font-size:2.4rem !important}
-header p{font-size:.92rem !important}
+#logoBtn{font-size:2rem !important}
+header p{font-size:.82rem !important}
 .tab{font-size:.9rem !important;padding:9px 16px !important}
-label{font-size:.85rem !important;margin-bottom:6px !important}
-input, textarea, select{font-size:.95rem !important;padding:12px 14px !important;margin-bottom:10px !important}
-button.go{font-size:1rem !important;padding:14px !important}
+label{font-size:.78rem !important;margin-bottom:4px !important;margin-top:6px !important}
+input, textarea, select{font-size:.9rem !important;padding:10px 13px !important;margin-bottom:8px !important;border-radius:11px !important}
+button.go{font-size:.95rem !important;padding:12px !important;border-radius:12px !important;margin-top:6px !important}
 .copy-btn{font-size:.9rem !important;padding:11px !important}
-.counter{font-size:.85rem !important;padding:9px !important}
+.counter{font-size:.78rem !important;padding:7px !important;margin-top:6px !important}
 .gate-logo{font-size:2.6rem !important}
 .gate-sub{font-size:.95rem !important}
 .gate-input{font-size:.95rem !important;padding:13px 15px !important}
@@ -1497,7 +1497,7 @@ button.go{font-size:1rem !important;padding:14px !important}
 .gate-switch{font-size:.85rem !important}
 .gate-msg{font-size:.85rem !important}
 .gate-feature{font-size:.8rem !important;padding:6px 12px !important}
-.logout-btn{font-size:.82rem !important;padding:6px 12px !important}
+.logout-btn{font-size:.75rem !important;padding:5px 10px !important;border-radius:8px !important}
 .user-email{font-size:.85rem !important}
 .plan-duration{font-size:1.05rem !important}
 .plan-amount{font-size:1.5rem !important}
@@ -1513,7 +1513,7 @@ button.go{font-size:1rem !important;padding:14px !important}
 
 /* ===== صفحة الرئيسية ===== */
 .home-page{
-  width:100%;max-width:600px;
+  width:100%;max-width:480px;
   z-index:1;
   padding:20px 0;
 }
@@ -1571,14 +1571,14 @@ button.go{font-size:1rem !important;padding:14px !important}
 /* ===== زر رجوع + عنوان الخدمة ===== */
 .service-header{
   display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:20px;
-  gap:12px;
+  margin-bottom:12px;
+  gap:8px;
 }
 .back-btn{
-  padding:6px 12px;border-radius:12px;
+  padding:5px 10px;border-radius:10px;
   background:rgba(255,255,255,.08);
   border:.5px solid rgba(255,255,255,.18);
-  color:#d4d4de;font-size:.85rem;font-weight:600;
+  color:#d4d4de;font-size:.78rem;font-weight:600;
   cursor:pointer;font-family:inherit;
   transition:all .2s;
 }
@@ -1588,7 +1588,7 @@ button.go{font-size:1rem !important;padding:14px !important}
   color:#f7dc85;
 }
 .service-title{
-  font-size:1.2rem;font-weight:800;
+  font-size:1.05rem;font-weight:700;
   color:#f7dc85;
 }
 
@@ -1631,7 +1631,7 @@ button.go{font-size:1rem !important;padding:14px !important}
   <div id="logoBtn">مساعدك</div>
   <p id="tagline">صياغة احترافية بنقرة واحدة</p>
   <div class="premium-badge">مشترك بريميوم · استخدامات غير محدودة</div>
-  <div id="logoutArea" style="margin-top:10px;text-align:center;"></div>
+  <div id="logoutArea" style="margin-top:6px;text-align:center;"></div>
 </header>
 
 <div class="tabs" style="display:none">
@@ -2180,7 +2180,7 @@ function updateAuthUI(user) {
   const area = document.getElementById("logoutArea");
   if (!area) return;
   if (user) {
-    area.innerHTML = '<span style="color:#c8c8d4;font-size:.82rem;">' + user.email + '</span> <button class="logout-btn" id="logoutBtn">خروج</button>';
+    area.innerHTML = '<span style="color:#c8c8d4;font-size:.75rem;">' + user.email + '</span> <button class="logout-btn" id="logoutBtn">خروج</button>';
     document.getElementById("logoutBtn").addEventListener("click", async () => {
       await supabase.auth.signOut();
       location.reload();
