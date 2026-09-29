@@ -1602,7 +1602,7 @@ button.go{font-size:1.1rem !important;padding:18px !important}
 </head>
 <body>
 
-<div class="auth-gate" id="authGate">
+<div class="auth-gate hidden" id="authGate">
   <div class="auth-gate-inner">
     <h1 class="gate-logo">مساعدك</h1>
     <p class="gate-sub">أداتك الذكية للترجمة والصياغة وأفكار المحتوى</p>
@@ -1846,7 +1846,7 @@ button.go{font-size:1.1rem !important;padding:18px !important}
 
 
 
-<div class="home-page hidden" id="homePage">
+<div class="home-page" id="homePage">
   <div class="home-header">
     <div id="logoBtnHome">مساعدك</div>
     <p>اختار الخدمة</p>
@@ -2189,6 +2189,13 @@ function openApp(user) {
   startTrialIfNeeded();
 }
 
+function showAuthGate() {
+  authGate.classList.remove("hidden");
+  document.getElementById("homePage").classList.add("hidden");
+  document.getElementById("appContent").classList.add("hidden");
+  document.getElementById("serviceCard").classList.add("hidden");
+}
+
 function updateAuthUI(user) {
   const area = document.getElementById("logoutArea");
   if (!area) return;
@@ -2211,11 +2218,7 @@ function updateAuthUI(user) {
   if (session?.user) {
     openApp(session.user);
   } else {
-    // لو مفيش session، نظهر غلاف الدخول
-    document.getElementById("authGate").classList.remove("hidden");
-    document.getElementById("homePage").classList.add("hidden");
-    document.getElementById("appContent").classList.add("hidden");
-    document.getElementById("serviceCard").classList.add("hidden");
+    showAuthGate();
   }
 })();
 
