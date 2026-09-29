@@ -1508,6 +1508,88 @@ button.go{font-size:1.1rem !important;padding:18px !important}
 .admin-input{font-size:1.05rem !important;padding:15px !important}
 .admin-submit{font-size:1.05rem !important;padding:15px !important}
 
+
+/* ===== صفحة الرئيسية ===== */
+.home-page{
+  width:100%;max-width:600px;
+  z-index:1;
+  padding:20px 0;
+}
+.home-header{
+  text-align:center;
+  margin-bottom:32px;
+}
+#logoBtnHome{
+  font-size:3.2rem;font-weight:900;letter-spacing:2px;
+  background:linear-gradient(180deg,#fff8e0,#e8c860 55%,#b8912f);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  filter:drop-shadow(0 6px 24px rgba(232,200,96,.55));
+  margin-bottom:8px;
+}
+.home-header p{color:#a8a8b3;font-size:1.1rem;font-weight:500}
+
+.services-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  width:100%;
+}
+.service-card{
+  background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.04));
+  border:.5px solid rgba(255,255,255,.20);
+  border-radius:20px;
+  padding:28px 18px;
+  text-align:center;
+  cursor:pointer;
+  transition:all .2s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 8px 24px rgba(0,0,0,.3);
+}
+.service-card:hover{
+  transform:translateY(-3px);
+  border-color:rgba(232,200,96,.5);
+  box-shadow:0 12px 32px rgba(232,200,96,.25);
+}
+.service-card:active{
+  transform:translateY(-1px) scale(.98);
+}
+.service-icon{
+  font-size:2.8rem;
+  margin-bottom:12px;
+  filter:drop-shadow(0 4px 12px rgba(232,200,96,.4));
+}
+.service-name{
+  font-size:1.2rem;font-weight:800;color:#f2f2f7;
+  margin-bottom:6px;
+}
+.service-desc{
+  font-size:.88rem;color:#a8a8b3;font-weight:500;
+}
+
+/* ===== زر رجوع + عنوان الخدمة ===== */
+.service-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;
+  gap:12px;
+}
+.back-btn{
+  padding:8px 16px;border-radius:12px;
+  background:rgba(255,255,255,.08);
+  border:.5px solid rgba(255,255,255,.18);
+  color:#d4d4de;font-size:.95rem;font-weight:600;
+  cursor:pointer;font-family:inherit;
+  transition:all .2s;
+}
+.back-btn:hover{
+  background:rgba(232,200,96,.15);
+  border-color:rgba(232,200,96,.5);
+  color:#f7dc85;
+}
+.service-title{
+  font-size:1.5rem;font-weight:800;
+  color:#f7dc85;
+}
+
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1544,14 +1626,18 @@ button.go{font-size:1.1rem !important;padding:18px !important}
   <div id="logoutArea" style="margin-top:10px;text-align:center;"></div>
 </header>
 
-<div class="tabs">
+<div class="tabs" style="display:none">
   <div class="tab active" data-mode="translate">ترجمة</div>
   <div class="tab" data-mode="rewrite">صياغة</div>
   <div class="tab" data-mode="product">وصف منتج</div>
   <div class="tab" data-mode="ideas">أفكار محتوى</div>
 </div>
 
-<div class="card">
+<div class="card hidden" id="serviceCard">
+  <div class="service-header">
+    <button class="back-btn" id="backBtn">← رجوع</button>
+    <h2 class="service-title" id="serviceTitle">ترجمة</h2>
+  </div>
   <div id="pane-translate" class="pane">
     <label>النص</label>
     <textarea id="tr-text" rows="3" placeholder="أدخل النص هنا..."></textarea>
@@ -1752,6 +1838,36 @@ button.go{font-size:1.1rem !important;padding:18px !important}
 
 
 
+
+
+<div class="home-page hidden" id="homePage">
+  <div class="home-header">
+    <div id="logoBtnHome">مساعدك</div>
+    <p>اختار الخدمة</p>
+  </div>
+  <div class="services-grid" id="servicesGrid">
+    <div class="service-card" data-mode="translate">
+      <div class="service-icon">🌐</div>
+      <div class="service-name">ترجمة</div>
+      <div class="service-desc">26 لغة</div>
+    </div>
+    <div class="service-card" data-mode="rewrite">
+      <div class="service-icon">✏️</div>
+      <div class="service-name">صياغة</div>
+      <div class="service-desc">بنبرة مناسبة</div>
+    </div>
+    <div class="service-card" data-mode="product">
+      <div class="service-icon">📦</div>
+      <div class="service-name">وصف منتج</div>
+      <div class="service-desc">يبيع أكتر</div>
+    </div>
+    <div class="service-card" data-mode="ideas">
+      <div class="service-icon">💡</div>
+      <div class="service-name">أفكار محتوى</div>
+      <div class="service-desc">5 أفكار</div>
+    </div>
+  </div>
+</div>
 
 <div class="admin-modal hidden" id="adminModal">
   <div class="admin-modal-content">
@@ -2159,6 +2275,54 @@ adminSubmit.addEventListener("click", async () => {
 adminPass.addEventListener("keydown", (e) => {
   if (e.key === "Enter") adminSubmit.click();
 });
+
+
+// ===== التنقل بين الصفحات =====
+function showHome() {
+  document.getElementById("homePage").classList.remove("hidden");
+  document.getElementById("serviceCard").classList.add("hidden");
+  document.getElementById("appContent").classList.add("hidden");
+}
+
+function openService(mode) {
+  // نخفي الرئيسية
+  document.getElementById("homePage").classList.add("hidden");
+  // نظهر الكارد
+  const card = document.getElementById("serviceCard");
+  card.classList.remove("hidden");
+  document.getElementById("appContent").classList.remove("hidden");
+  
+  // نحدّث الوضع
+  currentMode = mode;
+  
+  // نحدّث العنوان
+  const titles = {
+    translate: "ترجمة",
+    rewrite: "صياغة",
+    product: "وصف منتج",
+    ideas: "أفكار محتوى"
+  };
+  document.getElementById("serviceTitle").textContent = titles[mode] || "";
+  
+  // نبدّل الـ pane
+  document.querySelectorAll(".pane").forEach(p => p.classList.add("hidden"));
+  document.getElementById("pane-" + mode).classList.remove("hidden");
+  
+  // نصفّر النتيجة
+  document.getElementById("out").classList.remove("show");
+  document.getElementById("out").textContent = "";
+  document.getElementById("copyBtn").classList.add("hidden");
+}
+
+// ربط الكروت
+document.querySelectorAll(".service-card").forEach(card => {
+  card.addEventListener("click", () => {
+    openService(card.dataset.mode);
+  });
+});
+
+// زر الرجوع
+document.getElementById("backBtn").addEventListener("click", showHome);
 
 applyPremium();
 renderCounter();
